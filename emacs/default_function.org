@@ -1,0 +1,24 @@
+* line editor
+** flush-lines
+  - get rid of garbage code, ex debug code etc, that  match a REGEXP
+  - Callable: M-x flush-lines
+* Search
+** Search in project
+*** comment:rgrap | find-grep-dired
+  - test the contents of files whose indivdual name match the pattern.
+  - callable with : M-x rgrap
+*** comment : find-name-dired
+  - choose all the files in directory or subdir whose individual name match the pattern.
+*** github: textmate 
+  - [[https://github.com/defunkt/textmate.el][textmate in Github]]
+
+** search something  in single file
+*** comment: occur
+  - searching in  current buff.
+  - callable with : M-x occur
+    
+* change input method
+  - C-x RET C-\ chinese-zozy RET
+  - C-u C-\ chinese-zozy RET (suggestion)
+  - C-\ -> chinese-zozy (then switch between two languages by C-\)
+  

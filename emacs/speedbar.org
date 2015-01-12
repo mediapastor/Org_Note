@@ -1,0 +1,9 @@
+* general used key in Speedbar windows
+In the speedbar window, you cloud use single key to do some stuff:
+  - R (uppercase) -> rename file
+  - D -> delete file or empty directory 
+  - q (lowercase) -> to close speedbar Windows
+  - r -> regenerate the list of folder in the speedbar.
+* general command
+** speedbar-get-focus
+To switch to  speedbar windows.

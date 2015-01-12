@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>memory<sub>management</sub></title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-09-24 08:06:24 CST"/>
+<meta name="author" content="CrimsonFantasy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+
+<h1 class="title">memory<sub>management</sub></h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Binding time </a>
+<ul>
+<li><a href="#sec-1.1">1.1 Compile time </a></li>
+<li><a href="#sec-1.2">1.2 memory allocation method </a></li>
+<li><a href="#sec-1.3">1.3 Execution Time(Dynamic Binding) </a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2 Memory allocation </a>
+<ul>
+<li><a href="#sec-2.1">2.1 Mthod: </a></li>
+<li><a href="#sec-2.2">2.2 Compare four allocation method </a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3 external fragment </a></li>
+<li><a href="#sec-4">4 Page Memory Management </a>
+<ul>
+<li><a href="#sec-4.1">4.1 allocation </a></li>
+<li><a href="#sec-4.2">4.2 adv </a></li>
+<li><a href="#sec-4.3">4.3 defect </a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 Internal fragment </a></li>
+<li><a href="#sec-6">6 Page Table </a></li>
+<li><a href="#sec-7">7 Segment Memory management </a>
+<ul>
+<li><a href="#sec-7.1">7.1 what is Segment? </a></li>
+<li><a href="#sec-7.2">7.2 ADV </a></li>
+<li><a href="#sec-7.3">7.3 Defect </a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Binding time </h2>
+<div class="outline-text-2" id="text-1">
+
+
+</div>
+
+<div id="outline-container-1.1" class="outline-3">
+<h3 id="sec-1.1"><span class="section-number-3">1.1</span> Compile time </h3>
+<div class="outline-text-3" id="text-1.1">
+
+<ul>
+<li>
+define
+<ul>
+<li>
+Compile decide the memory location in where.
+</li>
+</ul>
+</li>
+<li>
+defect
+<ol>
+<li>
+Initial location of program  is fixed.
+</li>
+<li>
+not support Relocation.
+
+</li>
+</ol>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-1.2" class="outline-3">
+<h3 id="sec-1.2"><span class="section-number-3">1.2</span> memory allocation method </h3>
+<div class="outline-text-3" id="text-1.2">
+
+<ul>
+<li>
+linking loader decide the location.
+</li>
+<li>
+adv:
+<ul>
+<li>
+support Relocation
+</li>
+</ul>
+</li>
+<li>
+defect
+<ul>
+<li>
+Loading model that is not required  cause waste of time and memory.
+</li>
+<li>
+Model with great amount fuctions need more time and memory when loading.
+
+</li>
+</ul>
+</li>
+</ul>
+
+<p>*
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1.3" class="outline-3">
+<h3 id="sec-1.3"><span class="section-number-3">1.3</span> Execution Time(Dynamic Binding) </h3>
+<div class="outline-text-3" id="text-1.3">
+
+<ul>
+<li>
+The location is decided at Execution time. 
+</li>
+<li>
+Need extra device to support
+<ul>
+<li>
+A Base Register store the base address.
+</li>
+<li>
+Physical address = base address + Local Address.
+</li>
+</ul>
+</li>
+<li>
+adv
+<ul>
+<li>
+high flexibility
+</li>
+</ul>
+</li>
+<li>
+defect
+<ol>
+<li>
+bad performance
+
+</li>
+</ol>
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Memory allocation </h2>
+<div class="outline-text-2" id="text-2">
+
+
+
+</div>
+
+<div id="outline-container-2.1" class="outline-3">
+<h3 id="sec-2.1"><span class="section-number-3">2.1</span> Mthod: </h3>
+<div class="outline-text-3" id="text-2.1">
+
+<ul>
+<li>
+First-Fit
+</li>
+<li>
+Best-Fit
+</li>
+<li>
+Worst-Fit
+</li>
+<li>
+Next-Fit
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-2.2" class="outline-3">
+<h3 id="sec-2.2"><span class="section-number-3">2.2</span> Compare four allocation method </h3>
+<div class="outline-text-3" id="text-2.2">
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col align="left" /><col align="left" /><col align="left" />
+</colgroup>
+<thead>
+<tr><th scope="col">0</th><th scope="col">Time</th><th scope="col">Time Utility</th></tr>
+</thead>
+<tbody>
+<tr><td>Firt-Fit</td><td>fine</td><td>fine</td></tr>
+</tbody>
+<tbody>
+<tr><td>Best-Fit</td><td>bad</td><td>fine</td></tr>
+</tbody>
+<tbody>
+<tr><td>Worst-Fit</td><td>bad</td><td>bad</td></tr>
+</tbody>
+<tbody>
+<tr><td>Next-Fit</td><td>fine</td><td>fine</td></tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> external fragment </h2>
+<div class="outline-text-2" id="text-3">
+
+<ul>
+<li>
+In contaguous method, when Sum of Fress block size &gt;= Process required size
+But Free blocak is not contiguous, free sapce can not be allocated for proccess.
+
+</li>
+<li>
+First/best/worst/next fit all cause external fragment.
+
+</li>
+<li>
+solution
+<ul>
+<li>
+Compatioc:
+<ul>
+<li>
+gater free spaces into Big contiguous free space.
+</li>
+<li>
+defect
+<ul>
+<li>
+It is hard  to find a stratege to gather free space in short time.
+</li>
+<li>
+need Dynamic Binding support.
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Page Memory Management </h2>
+<div class="outline-text-2" id="text-4">
+
+<ul>
+<li>
+Physical memory divide into n equal size,Frame.
+</li>
+<li>
+Logical memory dived into many Page as possible.
+</li>
+<li>
+Page size = Frame size
+</li>
+</ul>
+
+</div>
+
+<div id="outline-container-4.1" class="outline-3">
+<h3 id="sec-4.1"><span class="section-number-3">4.1</span> allocation </h3>
+<div class="outline-text-3" id="text-4.1">
+
+<ul>
+<li>
+OS give  frames that n*frame &gt;= n*Page
+</li>
+<li>
+non-contifuous allocation
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-4.2" class="outline-3">
+<h3 id="sec-4.2"><span class="section-number-3">4.2</span> adv </h3>
+<div class="outline-text-3" id="text-4.2">
+
+<ul>
+<li>
+slove exteranl fragment
+</li>
+<li>
+support share memory
+</li>
+<li>
+support to make dynamic loading and Virtual memory.
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-4.3" class="outline-3">
+<h3 id="sec-4.3"><span class="section-number-3">4.3</span> defect </h3>
+<div class="outline-text-3" id="text-4.3">
+
+<ul>
+<li>
+internal fragment
+</li>
+<li>
+longer time to access memory.(spending on looking inquire Page table)
+</li>
+<li>
+require extra device support(Page table)
+
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Internal fragment </h2>
+<div class="outline-text-2" id="text-5">
+
+<ul>
+<li>
+Frame size &gt; page size;
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Page Table </h2>
+<div class="outline-text-2" id="text-6">
+
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Segment Memory management </h2>
+<div class="outline-text-2" id="text-7">
+
+<ul>
+<li>
+pysical memory is NOT divided into smallspace.
+</li>
+<li>
+Logical memory is divided into Segments that vary in size.
+</li>
+</ul>
+
+</div>
+
+<div id="outline-container-7.1" class="outline-3">
+<h3 id="sec-7.1"><span class="section-number-3">7.1</span> what is Segment? </h3>
+<div class="outline-text-3" id="text-7.1">
+
+<ul>
+<li>
+main
+</li>
+<li>
+subroutine
+</li>
+<li>
+data section
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-7.2" class="outline-3">
+<h3 id="sec-7.2"><span class="section-number-3">7.2</span> ADV </h3>
+<div class="outline-text-3" id="text-7.2">
+
+<ol>
+<li>
+ no Internal fragment.
+</li>
+<li>
+support sharing memory and protection
+<ul>
+<li>
+It is easier to do than page management.
+</li>
+</ul>
+</li>
+</ol>
+</div>
+
+</div>
+
+<div id="outline-container-7.3" class="outline-3">
+<h3 id="sec-7.3"><span class="section-number-3">7.3</span> Defect </h3>
+<div class="outline-text-3" id="text-7.3">
+
+<ol>
+<li>
+External fragment
+</li>
+<li>
+longer time to access memory.
+</li>
+<li>
+need extra device support.
+
+
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble">
+<p class="author"> Author: CrimsonFantasy
+<a href="mailto:crimsonfantasy@CrimsonFantasy.www.crimsonfantasy.com">&lt;crimsonfantasy@CrimsonFantasy.www.crimsonfantasy.com&gt;</a>
+</p>
+<p class="date"> Date: 2014-09-24 08:06:24 CST</p>
+<p class="creator">HTML generated by org-mode 6.33x in emacs 23</p>
+</div>
+</div>
+</body>
+</html>

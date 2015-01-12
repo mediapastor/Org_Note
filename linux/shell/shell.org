@@ -1,0 +1,27 @@
+* awk
+- awk, a Interpreted programming language tool, used for 
+  - text processing
+  - data extraction
+  - reporting tool
+- name, abbreviation  of three author's family name.
+  - Alfred aho, Peter Weinberger , and Brian kernighan
+Usage: awk -F 'program' file.
+For example:
+#+begin_src <sh>
+1. awk -F: '{print $1 $6}' /etc/passwd
+2. ls -l /etc | awk '{print $1 "\t" $9}'
+#+end_src
+
+* batch
+batch read the commands from standard input or a specified file which are
+to be executed at a later time.
+- options
+  - -f : read commands from file  instead of standard
+  - -m : send mail to the user when the job has complete
+  - -q : uses the specified queue.
+#+begin_src <sh>
+1. batch -f do.bat
+#+end_src
+
+
+

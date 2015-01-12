@@ -1,0 +1,24 @@
+* What is diff between For and To when using?
+** how to use for?
+ - Section 3 presents the new approach based 
+ on "mean absolute deviation" "for" measuring the degree of similarity between
+ generalized fuzzy numbers.
+ - The proposed website follows the
+ "configurations of Facebook" "for" posting messages, comments,
+ likes, and gifts.
+** how to use To? 
+ - Diatom frustules were "added" to a TiO2 paste to "prepare"
+ a TiO2-diatom paste mixture.
+ -  Lin et al. [24] "employed" an HHT-based time-frequency method "to 
+ "analyze" the FP1 EEG signals of clinical alcoholic and normal observers.
+ 
+
+
+
+
+
+  
+
+     
+   
+

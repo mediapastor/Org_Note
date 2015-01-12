@@ -1,0 +1,5 @@
+* type chinese 
+  1. c-\
+  2. M-X toggle-inputmethod -> chinese-zozy
+You can type 'Tab' to get all list of all words whose  pronunciation  are same.
+

@@ -1,0 +1,36 @@
+* install Guild
+ 
+** install prerequired theme engine
+*** install equinox
+Equinox is one tool in ubuntun, adding a repository in sources.list.
+
+- add a line in sources.list
+#+begin_src <sh?>
+deb http://ppa.launchpad.net/tiheum/equinox/ubuntu lucid main
+#+end_src
+
+- apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4631BBEA
+- apt-get update
+- apt-get install equinox-theme
+*** install pixbuf
+
+At the begine when launching Gnome, If it  causes problem,Unable to locate theme engine in module_path: "pixmap",
+it requires engine pixbuf. Installing it thought apt-get.
+#+begin_src <sh>
+apt-get install gtk2-engines-pixbuf
+#+end_src
+
+
+
+
+** install DeLorean-Dark theme
+Download DeLorean-Dark theme from [[[[http://gnome-look.org/content/show.php/DeLorean-Dark-Themes?content=159296]]][gnome-look.org]]
+  - mkdir ~/.themes
+  - put DeLorean-dark in the ~/.themes
+  - use gnome-tweak-tool
+Selecting item named Theme in the Left List,you will see the "Windows theme"
+"GTK+ theme" , "Shell theme" etc.... Pulling down these list, you will see DeLorean as one of item.
+  - Setting theme by tweak tool
+When selecting DeLorean theme to be a  whatever theme by tweak-tool, 
+Gnome instantly changes its appearance to the topic of DeLorean.
+

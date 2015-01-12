@@ -1,0 +1,32 @@
+*Tasks
+** DONE Start new org file for tutorial
+   CLOSED: [2014-09-21 Sun 22:22]
+** DONE Outline document
+   CLOSED: [2014-09-21 Sun 22:34]
+** DONE Write introduction
+   CLOSED: [2014-09-21 Sun 22:36]
+** TODO Finish document
+
+
+* Intoduction
+
+Org-mode is a personal information management and outlining tool for 
+Emasc. This document is intend to give reader a "feel" for org-mode
+ and to teach basic operations.
+
+** Obtaining org-mode
+
+You can dowload org-mode from the [[http:staff.sceience.uva.nl/~dominik/Tools/org/][org-mode home pafe]]   
+
+** Installation
+** Configuratrion
+* The basics
+** create a new file
+** Simple task list
+** Using headline to structure a document
+** Adding note to a task
+** scheduling an appontment
+** Using the agenda
+
+
+

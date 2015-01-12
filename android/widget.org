@@ -1,0 +1,28 @@
+** SimepleAdaptor
+
+#+begin_src <java>
+  String[] list = {"item 0 " , "item 1" ,"item 2"}
+  ArrayLst<Map<String, Object>> items = new ArrayList<Map<String, Object>>();
+  for (int i = 0; i < list.length; i++) {
+	Map<String, Object> item = new HashMap<String, Object>();
+	item.put("text", list[i]);
+	items.add(item);
+	}
+  SimpleAdapter = new SimpleAdapter(context, items,
+	R.layout.engineerbackbar, new String[] { "text" },
+	new int[] { R.id.text });
+
+#+end_src
+
+Each item in listView  has one clumn named "text".  
+
+| "text" (column name) ---------> item 0  |
+| "text" (column name) ---------> item 1  |
+| "text" (column name) ---------> item 2  |
+ListView has more than one item.
+There is one column named "text" in item. 
+And a View(which refer sourece R.id.text) is binded to coulmn. 
+
+
+
+

@@ -1,0 +1,5 @@
+** gcc: include library 
+To Adding opion -lm on gcc command.For example:
+#+begin_src <sh>
+gcc -o xx.o -c xx.c -lm
+#+end_src

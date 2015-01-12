@@ -1,0 +1,25 @@
+* generate Java Tags file
+** install ctags-exuberant
+** download project source, j2ee/se source 
+  - [[https://java.net/projects/openjdk6/downloads/][souce of openJDK6]]
+** using cTag-exuberant to generate TAGS file 
+#+begin_src <sh>
+find . | grep ".*\.\java"  | xargs ctags-exuberant -e  --language-force=java
+or
+find . -type f -name "*.java" | xrags etags -e --language-force=java -a 
+#+end_src
+   1. change directory to the root of project. 
+   2. regex ".*\.\java " is a form to fully match  string  ./xxx/xxx/xxx/xx.java
+   3. Argument -e of ctags is specifies to generate tags file used by Emacs. 
+   4. --language-force=xx  present that all file to be interpreted using specified language.
+** set path to tags file in EMACS configure file .
+#+begin_src <lisp>
+(setq path-to-ctags "./emacs.d/tags")
+#+end_src
+
+
+* set Tags file to be in a  list of tags tables.
+If I put TAGS in the path ,~/.emacs.d/ctags/,...
+#+begin_src <lisp>
+  (setq tags-table-list '("~/.emacs.d/ctags/"))  
+ #+end_src

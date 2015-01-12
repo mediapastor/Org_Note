@@ -1,0 +1,33 @@
+* Install Android Mode for Emacs
+** In emacs 23 , it requires cl libtary that is part of Emacs24
+1. download cl-lib from [[http://elpa.gnu.org/packages/cl-lib.html][cl-lib]]
+2. install cl-lib
+#+begin_src <lisp>
+
+(add-to-list 'load-path "~/.emacs.d/lisp/android_mode/lib")
+(require 'cl-lib)
+
+#+end_src
+
+** export PATH android tools
+#+begin_src <sh>
+export PATH=%PATH:path-to-android-sdk 
+#+end_src  
+Be sure that the adb tool is in the dictioary "path-to-android-sdk".
+
+** clone Android mode repository from Github
+#+begin_src <sh>
+git clone git://github.com/remvee/android-mode.git
+#+end_src
+
+** configute Emacs to use Android Mode
+#+begin_src <lisp>
+(add-to-list 'load-path "~/.emacs.d/lisp/android_mode/android_mode")
+(require 'android-mode)
+;; set location where android sdk is in. 
+(custom-set-variables '(android-mode-sdk-dir "~/application/application/adt-bundle-linux-x86-20140321/sdk"))
+#+end_src
+
+
+
+** 

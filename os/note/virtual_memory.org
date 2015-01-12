@@ -1,0 +1,66 @@
+* Virtual Memory
+- goal:
+  - aloow virtual memory to be provided for programmers when only smaller physical memory
+    is avaliable.
+* Demand Paging
+- Load page only as they need.(called Lazy Swap)
+- Valid and invalid schme in Page table.
+  - Valid : have already load
+  - invalid: not load
+- Page fault
+  - access a page that mared as invalid
+- When start a process,
+  - Pure demand page 
+    - never bring a page util it is required.
+* Effective access time
+- (1-p)*ma + p* page fault time
+ - ma :memory access time
+ - p: page fault rate
+* Page replacement
+  - step:   
+      1. Find the location of desire page on Disk
+      2. Find a free frame.(If there is no a free grame)
+	- use a page-replacement algorithm to select a Victim Page.
+	- witre victim frame to disk. change the page and frame talbes
+      3. Read the desired page into new freed frame;change page and frame table
+      4. restart user program.
+  - Redice the times Vicetim page be swapped into disk.
+    - use modification bit
+      - modification bit = 0 --> haven't be  modified --> overlap 
+      - modification bit = 1 --> modified --> swap into disk
+* Page Replacement Algorithm
+  - FIFO
+  - Optimal Page Replacement
+  - Least Resent Used  Replacement
+  - LRU Approximation Page Replacement
+  - Frequency
+** FIFO
+   - defect
+     - Belady's anomaly
+       - the page-fault rate may increase as the number of 
+	 allocated frame increase.
+
+
+** Optimal Page algorithm
+  - Replace the frame that will not be used for the longest period of time.
+  - adv
+    - the lowest page-fault rate of all algorithm.
+    - never suffer Belady's anomaly.
+
+** LRU
+  - two algorithm are feasible
+    - counter
+    - stack
+  - adv:
+    - both does not exhibit Belady's anomaly
+  - defect 
+    - Merely OS complete support LRU.
+** Second chance algorithm
+  - based on FIFO algorithm.
+  - adding a second chance bit.
+  - adv
+    - It all  bits set to 1, Second chance algorithm degenerate to FIFO.
+ 
+
+
+** 

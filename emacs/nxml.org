@@ -1,0 +1,123 @@
+#wordpress title: emacs Nxml Guild
+* Introduce
+* Editing 
+** nxml-insert-xml-declaration
+  - callable with: C-c C-x
+#+begin_src <xml>
+   <!--after using:   -->
+   <?xml version="1.0" encoding="utf-8"?>
+#+end_src
+
+** nxml-complete
+   - callable with:<C-return>
+#+begin_src <xml>
+<!--before using -->
+<html xmlns="
+<!-- after using -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!--before using -->
+<he
+
+<!- after using -->
+<head></head>
+
+#+end_src
+
+
+** nxml-balanced-close-start-tag-block
+  - Insert an end tag. and put point between the start and end tag on the new line 
+  - callable with: C-c C-b
+#+begin_src <xml>
+<!--before using -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+
+<!-- after using -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+#+end_src
+
+** nxml-balanced-clos-start-tag-inline
+   -Unlike nxml-balanced-close-start-tag-block, It make end tag be on the same line.
+   - Callable with: C-c TAB
+#+begin_src <xml>
+<!--before using -->
+<head
+<!-- after using -->
+<head> </head>
+#+end_src
+
+** nxml-finish-element
+  - Close the nearst unclosed tag
+  - Callable with: C-c C-f
+#+begin_src <xml>
+<!- before using  -->
+<head><title> unclosed title block </head>
+<!-- after using -->
+<head><title> unclosed title block </title></head>
+#+end_src
+
+* Cursor moving
+** forward-sexp
+   - navigation forward between tags
+   - callable with: C-M-f
+** backward-sexp
+  - navigation backward between tags
+  - callable with : C-M-b
+** nxml-backward-up-element
+  - navigation in the tree-strcture to its parent
+  - C-M-u
+** nxml-down-element
+   - navigation in the tree structure to its child
+   - C-M-d
+
+* show Warning 
+** rng-next-error 
+  - show warning at the  red line 
+  - callable with C-c C-n
+
+* uncompact/compact
+* Unicode
+** nxml-insety-unicode 
+  - acces to unicode characters
+  - C-c C-u
+#+begin_src <xml>
+<!-before using-->
+<b></b>
+<!- after using -->
+<b>&#x2442;</b>
+#+end_src
+
+* outlining 
+We have to set section and heading element first.
+#+begin_src <lisp>
+(setq nxml-section-element-name-regexp "div//|table")
+(setq nxml-heading-element-name-regexp "h1//|td");
+#+end_src
+ * its start-tag must occur at the beginning of a line (possibly indented);
+ * its local name must match nxml-section-element-name-regexp;
+ * either its first child element or a descendant of that first child element must have a local name that matches nxml-heading-element-name-regexp; 
+   - the first such element is treated as the section's heading. 
+Wrting the html like this
+#+begin_src <html>
+<table> <!- match nxml-section-element-name-regexp(table) -->
+<tr>
+<td>gJill</td>  <1- the first child element td matched nxml-heading-element-name-regexp is viewed as section's heading .
+<td>Smith</td>
+<td>50</td>
+</tr>
+<tr>
+<td>Eve</td>
+<td>Jackson</td>
+<td>94</td>
+</tr>  
+</table>
+#+end_src
+After calling with C-c C-o C-d or C-c C-o C-c
+#+begin_src <html>
+<-table gJill...</>
+#+end_src
+
+ - see more at: [[http://www.gnu.org/software/emacs/manual/html_node/nxml-mode/Outlining.html#Outlining][(gnu)nxml outline]]
+  
+* schema

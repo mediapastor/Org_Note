@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>nxml</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-11-10 10:51:39 CST"/>
+<meta name="author" content="CrimsonFantasy"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+
+<h1 class="title">nxml</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Introduce </a></li>
+<li><a href="#sec-2">2 Editing </a>
+<ul>
+<li><a href="#sec-2.1">2.1 nxml-insert-xml-declaration </a></li>
+<li><a href="#sec-2.2">2.2 nxml-complete </a></li>
+<li><a href="#sec-2.3">2.3 nxml-balanced-close-start-tag-block </a></li>
+<li><a href="#sec-2.4">2.4 nxml-balanced-clos-start-tag-inline </a></li>
+<li><a href="#sec-2.5">2.5 nxml-finish-element </a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3 Cursor moving </a>
+<ul>
+<li><a href="#sec-3.1">3.1 forward-sexp </a></li>
+<li><a href="#sec-3.2">3.2 backward-sexp </a></li>
+<li><a href="#sec-3.3">3.3 nxml-backward-up-element </a></li>
+<li><a href="#sec-3.4">3.4 nxml-down-element </a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 show Warning </a>
+<ul>
+<li><a href="#sec-4.1">4.1 rng-next-error </a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 uncompact/compact </a></li>
+<li><a href="#sec-6">6 Unicode </a>
+<ul>
+<li><a href="#sec-6.1">6.1 nxml-insety-unicode </a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7 outlining </a></li>
+<li><a href="#sec-8">8 schema </a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduce </h2>
+<div class="outline-text-2" id="text-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Editing </h2>
+<div class="outline-text-2" id="text-2">
+
+
+</div>
+
+<div id="outline-container-2.1" class="outline-3">
+<h3 id="sec-2.1"><span class="section-number-3">2.1</span> nxml-insert-xml-declaration </h3>
+<div class="outline-text-3" id="text-2.1">
+
+<ul>
+<li>
+callable with: C-c C-x
+
+</li>
+</ul>
+
+
+<pre class="example">&lt;!--after using:   --&gt;
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+</pre>
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2.2" class="outline-3">
+<h3 id="sec-2.2"><span class="section-number-3">2.2</span> nxml-complete </h3>
+<div class="outline-text-3" id="text-2.2">
+
+<ul>
+<li>
+callable with:&lt;C-return&gt;
+
+</li>
+</ul>
+
+
+<pre class="example">&lt;!--before using --&gt;
+&lt;html xmlns="
+&lt;!-- after using --&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+
+&lt;!--before using --&gt;
+&lt;he
+
+&lt;!- after using --&gt;
+&lt;head&gt;&lt;/head&gt;
+
+</pre>
+
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2.3" class="outline-3">
+<h3 id="sec-2.3"><span class="section-number-3">2.3</span> nxml-balanced-close-start-tag-block </h3>
+<div class="outline-text-3" id="text-2.3">
+
+<ul>
+<li>
+Insert an end tag. and put point between the start and end tag on the new line 
+</li>
+<li>
+callable with: C-c C-b
+
+</li>
+</ul>
+
+
+<pre class="example">&lt;!--before using --&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"
+
+&lt;!-- after using --&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;html&gt;
+</pre>
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2.4" class="outline-3">
+<h3 id="sec-2.4"><span class="section-number-3">2.4</span> nxml-balanced-clos-start-tag-inline </h3>
+<div class="outline-text-3" id="text-2.4">
+
+<p>-Unlike nxml-balanced-close-start-tag-block, It make end tag be on the same line.
+</p><ul>
+<li>
+Callable with: C-c TAB
+
+</li>
+</ul>
+
+
+<pre class="example">&lt;!--before using --&gt;
+&lt;head
+&lt;!-- after using --&gt;
+&lt;head&gt; &lt;/head&gt;
+</pre>
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2.5" class="outline-3">
+<h3 id="sec-2.5"><span class="section-number-3">2.5</span> nxml-finish-element </h3>
+<div class="outline-text-3" id="text-2.5">
+
+<ul>
+<li>
+Close the nearst unclosed tag
+</li>
+<li>
+Callable with: C-c C-f
+
+</li>
+</ul>
+
+
+<pre class="example">&lt;!- before using  --&gt;
+&lt;head&gt;&lt;title&gt; unclosed title block &lt;/head&gt;
+&lt;!-- after using --&gt;
+&lt;head&gt;&lt;title&gt; unclosed title block &lt;/title&gt;&lt;/head&gt;
+</pre>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Cursor moving </h2>
+<div class="outline-text-2" id="text-3">
+
+
+</div>
+
+<div id="outline-container-3.1" class="outline-3">
+<h3 id="sec-3.1"><span class="section-number-3">3.1</span> forward-sexp </h3>
+<div class="outline-text-3" id="text-3.1">
+
+<ul>
+<li>
+navigation forward between tags
+</li>
+<li>
+callable with: C-M-f
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3.2" class="outline-3">
+<h3 id="sec-3.2"><span class="section-number-3">3.2</span> backward-sexp </h3>
+<div class="outline-text-3" id="text-3.2">
+
+<ul>
+<li>
+navigation backward between tags
+</li>
+<li>
+callable with : C-M-b
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3.3" class="outline-3">
+<h3 id="sec-3.3"><span class="section-number-3">3.3</span> nxml-backward-up-element </h3>
+<div class="outline-text-3" id="text-3.3">
+
+<ul>
+<li>
+navigation in the tree-strcture to its parent
+</li>
+<li>
+C-M-u
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3.4" class="outline-3">
+<h3 id="sec-3.4"><span class="section-number-3">3.4</span> nxml-down-element </h3>
+<div class="outline-text-3" id="text-3.4">
+
+<ul>
+<li>
+navigation in the tree structure to its child
+</li>
+<li>
+C-M-d
+
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> show Warning </h2>
+<div class="outline-text-2" id="text-4">
+
+
+</div>
+
+<div id="outline-container-4.1" class="outline-3">
+<h3 id="sec-4.1"><span class="section-number-3">4.1</span> rng-next-error </h3>
+<div class="outline-text-3" id="text-4.1">
+
+<ul>
+<li>
+show warning at the  red line 
+</li>
+<li>
+callable with C-c C-n
+
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> uncompact/compact </h2>
+<div class="outline-text-2" id="text-5">
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Unicode </h2>
+<div class="outline-text-2" id="text-6">
+
+
+</div>
+
+<div id="outline-container-6.1" class="outline-3">
+<h3 id="sec-6.1"><span class="section-number-3">6.1</span> nxml-insety-unicode </h3>
+<div class="outline-text-3" id="text-6.1">
+
+<ul>
+<li>
+acces to unicode characters
+</li>
+<li>
+C-c C-u
+
+</li>
+</ul>
+
+
+<pre class="example">&lt;!-before using--&gt;
+&lt;b&gt;&lt;/b&gt;
+&lt;!- after using --&gt;
+&lt;b&gt;&amp;#x2442;&lt;/b&gt;
+</pre>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> outlining </h2>
+<div class="outline-text-2" id="text-7">
+
+<p>We have to set section and heading element first.
+</p>
+
+
+<pre class="example">(setq nxml-section-element-name-regexp "div//|table")
+(setq nxml-heading-element-name-regexp "h1//|td");
+</pre>
+
+
+
+<ul>
+<li>
+its start-tag must occur at the beginning of a line (possibly indented);
+</li>
+<li>
+its local name must match nxml-section-element-name-regexp;
+</li>
+<li>
+either its first child element or a descendant of that first child element must have a local name that matches nxml-heading-element-name-regexp; 
+<ul>
+<li>
+the first such element is treated as the section's heading. 
+</li>
+</ul>
+</li>
+</ul>
+
+<p>Wrting the html like this
+</p>
+
+
+<pre class="example">&lt;table&gt; &lt;!- match nxml-section-element-name-regexp(table) --&gt;
+&lt;tr&gt;
+&lt;td&gt;gJill&lt;/td&gt;  &lt;1- the first child element td matched nxml-heading-element-name-regexp is viewed as section's heading .
+&lt;td&gt;Smith&lt;/td&gt;
+&lt;td&gt;50&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Eve&lt;/td&gt;
+&lt;td&gt;Jackson&lt;/td&gt;
+&lt;td&gt;94&lt;/td&gt;
+&lt;/tr&gt;  
+&lt;/table&gt;
+</pre>
+
+
+
+<p>
+After calling with C-c C-o C-d or C-c C-o C-c
+</p>
+
+
+<pre class="example">&lt;-table gJill...&lt;/&gt;
+</pre>
+
+
+
+
+<ul>
+<li>
+see more at: <a href="http://www.gnu.org/software/emacs/manual/html_node/nxml-mode/Outlining.html#Outlining">(gnu)nxml outline</a>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> schema </h2>
+<div class="outline-text-2" id="text-8">
+
+</div>
+</div>
+<div id="postamble">
+<p class="author"> Author: CrimsonFantasy
+<a href="mailto:crimsonfantasy@CrimsonFantasy.www.crimsonfantasy.com">&lt;crimsonfantasy@CrimsonFantasy.www.crimsonfantasy.com&gt;</a>
+</p>
+<p class="date"> Date: 2014-11-10 10:51:39 CST</p>
+<p class="creator">HTML generated by org-mode 6.33x in emacs 23</p>
+</div>
+</div>
+</body>
+</html>

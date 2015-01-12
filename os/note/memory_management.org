@@ -1,0 +1,99 @@
+* Binding time
+** Compile time
+   - define
+     - Compile decide the memory location in where.
+   - defect
+     1. Initial location of program  is fixed.
+     2. not support Relocation.
+	
+** memory allocation method
+  - linking loader decide the location.
+  - adv:
+    - support Relocation
+  - defect
+    - Loading model that is not required  cause waste of time and memory.
+    - Model with great amount fuctions need more time and memory when loading.
+    
+*
+
+** Execution Time(Dynamic Binding)
+   - The location is decided at Execution time. 
+   - Need extra device to support
+     - A Base Register store the base address.
+     - Physical address = base address + Local Address.
+   - adv
+     - high flexibility
+   - defect
+     1. bad performance
+
+* Memory allocation
+
+** Mthod:
+ - First-Fit
+ - Best-Fit
+ - Worst-Fit
+ - Next-Fit
+** Compare four allocation method
+
+| 0         | Time | Time Utility |
+|-----------+------+--------------|
+| Firt-Fit  | fine | fine         |
+|-----------+------+--------------|
+| Best-Fit  | bad  | fine         |
+|-----------+------+--------------|
+| Worst-Fit | bad  | bad          |
+|-----------+------+--------------|
+| Next-Fit  | fine | fine         |
+|-----------+------+--------------|
+
+* external fragment
+    - 
+
+  - In contaguous method, when Sum of Fress block size >= Process required size
+    But Free blocak is not contiguous, free sapce can not be allocated for proccess.
+
+  - First/best/worst/next fit all cause external fragment.
+
+  - solution
+    - Compatioc:
+      - gater free spaces into Big contiguous free space.
+      - defect
+	- It is hard  to find a stratege to gather free space in short time.
+	- need Dynamic Binding support.
+
+* Page Memory Management
+ - Physical memory divide into n equal size,Frame.
+ - Logical memory dived into many Page as possible.
+ - Page size = Frame size
+** allocation
+ - OS give  frames that n*frame >= n*Page
+ - non-contifuous allocation
+**  adv
+ - slove exteranl fragment
+ - support share memory
+ - support to make dynamic loading and Virtual memory.
+**  defect
+ - internal fragment
+ - longer time to access memory.(spending on looking inquire Page table)
+ - require extra device support(Page table)
+
+* Internal fragment
+    - Frame size > page size;
+* Page Table
+* Segment Memory management
+ - pysical memory is NOT divided into smallspace.
+ - Logical memory is divided into Segments that vary in size.
+** what is Segment?
+ - main
+ - subroutine
+ - data section
+** ADV
+1.  no Internal fragment.
+2. support sharing memory and protection
+   - It is easier to do than page management.
+** Defect
+1. External fragment
+2. longer time to access memory.
+3. need extra device support.
+
+

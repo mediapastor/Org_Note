@@ -1,0 +1,20 @@
+* Eclips feature in Emacs
+**  instal eclime 
+*** down load server eclim
+[[http://eclim.org/install.html][download_eclim server]]
+*** install eclime: 
+#+begin_src <shell>
+java -jar eclime
+#+end_src
+    
+*** download emacs eclim
+Emacs eclimes supports that  Emacs GUI  accesses Eclime server by.  
+Download Emacs-eclime  from [[https://github.com/senny/emacs-eclim][senny's emacs-eclim]]
+#+begin_src 
+https://github.com/Crimsonfantasy/emacs-eclim.git
+#+end_src
+
+
+
+
+*** 

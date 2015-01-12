@@ -1,0 +1,15 @@
+* Could not create directory
+-  when
+  - installing plugin 
+** slove 
+First do not use 777, change it back to 755.
+Second you need to add the proper group permissions most likely to the same that Apache is running under. To find that out try:
+#+begin_src <sh>
+ps aux | grep apache 
+#+end_src
+You will see the Apache user group on the left.
+Now change your WordPress folder to the same user group, you can do this in a parent folder or sub folder but for sanity it usually best for parent folder, use -R to recursively do it.
+#+begin_src <sh>
+chown -R www-data:www-data /path/to/wp-root-folder
+#+end_src
+

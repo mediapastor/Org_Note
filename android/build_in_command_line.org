@@ -1,0 +1,10 @@
+** create android project
+#+begin_src <sh>
+android create project --target 1 --name Mytest --path ~/Downloads/cc --activity AAA  --package cc.aa
+#+end_src
+** use ant to  debug and install
+#+begin_src 
+ant debug install
+#+end_src
+
+
