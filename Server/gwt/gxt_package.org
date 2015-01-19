@@ -1,0 +1,176 @@
+* Guild Online
+1. [[http://docs-origin.sencha.com/gxt-guides/3/][Guild]]
+2. [[http://docs.sencha.com/gxt/3/][Java doc gxt 3.0.1]]
+* anotation
+** Path 
+#+BEGIN_SRC <java>
+public class Person {
+  public String getName()...
+  public void setName(String name)...
+}
+
+interface PersonPropertyAccess extends PropertyAccess<Person> {
+  // wont compile!
+  LabelProvider<Person> name();
+  ValueProvider<Person, String> name();
+  ModelKeyProvider<Person> name();
+}
+#+END_SRC
+With the path annotation, you can have different methods that access the same property, with different names:
+#+BEGIN_SRC <java>
+interface PersonPropertyAccess extends PropertyAccess<Person> {
+  // valid
+  @Path("name")
+  LabelProvider<Person> nameLabel();
+  @Path("name")
+  ValueProvider<Person, String> nameValueProvider();
+  @Path("name")
+  ModelKeyProvider<Person> nameKey();
+}
+#+END_SRC
+The goal is to allow developers to write readable PropertyAccess types that are able to use the same property in different ways.
+* gxt.widget.core.client.client
+** Button
+- UiBinder template
+  - text : text in button
+#+BEGIN_SRC <xml>
+ <c:button>
+        <button:TextButton ui:field="reset" text="Cancel" />
+ </c:button>
+#+END_SRC
+
+** ContentPanel
+containing header, body , footer section
+- Hader may contin Icon.
+- Bdy contain a single widget. Widget cloud resize to match the container.
+- Rooter contains buttons
+Provides expandable and collapsible behavior.
+
+*** UIBinder Templeate
+- bodyStyle : Css style on the Body section
+- headerVisible : Show or hide header section.
+
+#+BEGIN_SRC <xml>
+<c:ContentPanel width="400" bodyStyle="padding: 5px;" headerVisible="false">
+<!-- body section -->
+   <container:xxx>
+  </container:xxx>
+<!-- footor -->
+   <gxt:button>
+   </gxt:button>
+   <gxt:button>
+   </gxt:button>
+</c:ConetentPanel>
+#+END_SRC
+
+** Container
+*** CssFloatContainer
+A layout container that uses the CSS float style to enable widgets to float around other widgets.
+- CSS float : a float element will move as far as right or left as it can,
+#+BEGIN_SRC <css>
+.floatDemo{
+float : right;
+}
+#+END_SRC
+**** CssFloatData
+Specifies widget layout parameters that control the size of the widget.
+**** XML Template
+- size: the arg for CssFloatData constructor.Sets the width of the column.
+#+BEGIN_SRC 
+<ui:with type="com.sencha.gxt.widget.core.client.container.CssFloatLayoutContainer.CssFloatData" field="layoutData">
+    <ui:attributes size="1" />
+</ui:with>
+#+END_SRC
+
+#+BEGIN_SRC 
+<container:CssFloatLayoutContainer ui:field="inner">
+        <container:child layoutData="{layoutData}">
+        </container:child>
+</container:CssFloatLayoutContainer>
+#+END_SRC
+
+** form
+*** FieldLable
+Form "field wrapper" to add a label and validation error text.
+(a class wrapper field and label)
+**** UIBinder template
+ - Because of constructor, FieldLabel(Widget widget) need Widget type,
+using <form:widget> to transform from xxx to widget type.
+ - In this code example, a wrapper genera tied contain label and ComboBox
+#+BEGIN_SRC <xml>
+<form:FieldLabel text="Select Company">
+     <form:widget>
+       <form:ComboBox ui:field="scb" store="{stockStore}" labelProvider="{stockLabelProvider}"
+        forceSelection="true" editable="false" typeAhead="true" name="company" triggerAction="ALL" />
+     </form:widget>
+</form:FieldLabel>
+#+END_SRC
+*** ComboBox
+ - A comboBox is like a combination of traditional HTML text <input> field
+and <select>
+ - support autocomplete and remote-loading
+**** XML Template
+ - foreSelection : prevent free-form value and restrict them to items in the list.
+ - listStore : Selection list's option is populated form ListStore.
+ - editable : Allow or prevent the user from directly editing the field text.
+ - typeAhead : True to populate autoselect the reminder of text being type after
+configurable delay if it matches the know values.
+ - triggerAction : The action to execute when the trigger field is activated.
+#+BEGIN_SRC <xml>
+<form:ComboBox ui:field="scb" store="{listStore}" labelProvider="{labelProvider}"
+ forceSelection="true" editable="false" typeAhead="true" name="company" triggerAction="ALL" />
+</form:widget>
+#+END_SRC
+create a POJO Stock...
+#+BEGIN_SRC <javja>
+public class Stock implements Serializable {
+ String name;
+ String valueA;
+ public Stock(String valueA){
+ this.valueA = valueA;
+}
+ public String getValueA(String value){...}
+ public void serValueA(){...};
+ public void setName(String name){...}
+ public String getName(){...};
+}
+#+END_SRC
+Implrment a interface that extends  PropertyAccess.
+Three methods return respectively ModelKeyProvide,LabelProvider,ValueProvider.
+Then. Using GWT.create generates source that implementing PropertyAccess.
+In this example ,labelName is uniqe that also is a key.
+#+BEGIN_SRC <java>
+public interface StockProperties extends PropertyAccess<Stock> {
+@Path("name")
+ModelKeyProvider<Stock> key();
+@Path("name")
+LabelProvider<Stock> labelName();
+ValueProvider<Stock, String> valueA();
+}
+#+END_SRC
+Java module mapping to the template have declare fields;
+#+BEGIN_SRC <java>
+@UiField(provided = true)
+ListStore<Stock> listStore;
+private StockProperties props = GWT.create(StockProperties.class);
+@UiField(provided = true)
+LabelProvider<Stock> labelProvider = props.nameLabel();
+#+END_SRC
+In the constructor of UI module:
+#+BEGIN_SRC <java>
+stockStore = new ListStore<Stock>(props.key());
+stockStore.addAll(TestData.getStocks());
+#+END_SRC
+
+* gwt.user.client.ui
+** HorizontalPanel
+A panel that lays all of its widgets out in a single horizontal column. 
+- UiBinder template
+  - spacing (Cellpanel) : Sets the amount of spacing between this panel's cells. 
+#+BEGIN_SRC <xml>
+<g:HorizontalPanel spacing="10"/>
+#+END_SRC
+
+
+
+
