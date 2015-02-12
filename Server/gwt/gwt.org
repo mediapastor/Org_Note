@@ -55,3 +55,9 @@ to get the value to display for each model in the tree.
 yet read
 
 
+
+* Notice in Coding
+** Only class literals may be used as arguments to GWT.create()
+  As a result, all classes must be decided at compile time.
+  If your code requires that the at _runtime_ the class is decided. 
+  This is too late, and so cannot be compiled. and trig this messgae.
