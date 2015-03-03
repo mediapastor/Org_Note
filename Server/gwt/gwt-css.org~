@@ -1,0 +1,19 @@
+* UIBinder with CSS
+** method 1 
+Declare Style,
+ - there is only one style elememt in xxx.ui.xml file.
+#+BEGIN_SRC <xml>
+<ui:style>
+	.solid{
+	border-style:solid;}
+</ui:style>
+#+END_SRC
+
+#+BEGIN_SRC <xml>
+...
+<container:HorizontalLayoutContainer>
+ <container:child layoutData="{sideLayoutData}">
+  <g:Label text="Test Label 1" addStyleNames="{style.solid}" />
+ </container:child>
+...
+#+END_SRC

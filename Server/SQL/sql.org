@@ -1,0 +1,8 @@
+* install
+** Debian
+sudo apt-get install mysql-server mysql-client
+
+
+* login
+mysql -uUSERNAME -p
+
