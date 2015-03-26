@@ -1,0 +1,7 @@
+* Security isssue: 
+if you run webeX on browser, and system show security issue.
+Webex faul to start.
+Solution:
+1. /usr/lib/jvm/java-8-oracle/jre/bin/ControlPanela 
+   or In Gnome, type controlPanel
+2. select security tab -> add excepted URL. 

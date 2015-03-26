@@ -6,3 +6,25 @@ sudo apt-get install mysql-server mysql-client
 * login
 mysql -uUSERNAME -p
 
+
+* command prompting learn
+1. auto_incement
+   
+   
+
+
+* ERROR and Solution
+** ERROR 1054 (42S22): Unknown column 'com.hwacom.ngtms.emm.fm.VendorRemote' in 'where clause'
+- cause
+#+BEGIN_SRC sql
+update `fme_definition` set `class_name`="com.hwacom.ngtms.emm.fm.VendorRemote" where `name`="VendorRemote";
+#+END_SRC
+- solution :
+#+BEGIN_SRC sql
+update `fme_definition` set `class_name`=`com.hwacom.ngtms.emm.fm.VendorRemote` where `name`=`VendorRemote`;
+#+END_SRC
+- Why:
+`xxx` ----> SQL's column name
+"xxx" ----> SQL's String value
+
+ 

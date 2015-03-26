@@ -1,0 +1,14 @@
+
+* annotation relativ with @entity class
+**  @GeneratedValue
+-  (strategy=GenerationType.AUTO)
+** @Column
+- (nullable = false)
+** @OneToMany
+** @OneToMany(cascade = {CascadeType.PERSIST})
+ - alway followed
+ - @JoinColumn(name = "EntityA_id")
+ - private List<EntityX> 
+
+** @NameQuerry
+    
