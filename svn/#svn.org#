@@ -2,8 +2,4 @@
 + svn st | grep ^! | awk '{print " --force "$2}' | xargs svn rm
 * Auto add all file
 - find * | xargs svn add --force
-* log 
-- watch the specified version
-svn log -r ${version}
-- watch n last log
-- svn log -l 3
+b

@@ -21,4 +21,8 @@
   - C-x RET C-\ chinese-zozy RET
   - C-u C-\ chinese-zozy RET (suggestion)
   - C-\ -> chinese-zozy (then switch between two languages by C-\)
+* How do I insert <some text> at the beginning of every line?
+ To do this to an entire buffer, type M-< M-x replace-regexp RET ^ RET your text RET.
+ 
+
   

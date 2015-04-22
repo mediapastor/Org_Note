@@ -1,0 +1,3 @@
+
+* Skip unit test
+$ mvn install -Dmaven.test.skip=true

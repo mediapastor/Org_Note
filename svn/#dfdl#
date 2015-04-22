@@ -1,0 +1,13 @@
+
+
+						<container:child layoutData="{verticalChildLayoutData}">						
+							<form:FieldLabel text="{messages.liabilityPeriod}">
+            					<form:widget>
+              						<g:HorizontalPanel>
+              							<form:DateField ui:field="contractBeginDateField"/> 
+              							<g:Label text="{messages.reach}"></g:Label>
+              							<form:DateField ui:field="contractEndDateField"/>              							
+                					</g:HorizontalPanel>
+            					</form:widget>
+          					</form:FieldLabel>																		
+						</container:child>					
