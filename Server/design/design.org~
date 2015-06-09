@@ -1,0 +1,4 @@
+The key Points when designing server
+1. 資料來自server side不須國際化, view的呈現和靜態資料需要國際化
+2. 在server side要注意thread safe的問題,(SE 5 ReentrantLock)
+3. DOC, Java convention

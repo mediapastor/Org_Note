@@ -7,3 +7,22 @@
 svn log -r ${version}
 - watch n last log
 - svn log -l 3
+* svn ignore
+- svn propedit svn:ignore {dictionary_name}
+- edit this, adding uri , regex related to  files.
+EXample: I want to ignore files A,B,C in /src/java/com/rr/ : 
+- svn propedit:ignore /src/java/com/rr
+- add files name A , B , C 
+- save file
+- svn st to check whether it is successfu to ignore.
+* svn commit
+1. method 1:
+#+BEGIN_SRC 
+commits files at onces
+svn st | grep ^[A\|M] | cut -d' ' -f8- > targets.txt
+svn ci -m "My commit message" --targets targets.txt
+#+END_SRC
+2. method 2:
+#+BEGIN_SRC 
+svn ci file1 file2 dir1/file3
+#+END_SRC

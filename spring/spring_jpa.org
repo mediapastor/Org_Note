@@ -1,0 +1,27 @@
+* specify  Query in transaction that  Spring manages
+http://hantsy.blogspot.tw/2013/11/auditing-with-hibernate-envers.html
+#+BEGIN_SRC 
+@Autowired
+ PlatformTransactionManager transactionManager;
+TransactionTemplate transactionTemplate;
+#+END_SRC
+
+add transaction callback
+1. 
+#+BEGIN_SRC 
+transactionTemplate = new TransactionTemplate(transactionManager);
+        // TransactionCallbackWithoutResult
+        transactionTemplate.execute(new TransactionCallback<EmmDeviceCfg>() {
+            @Override
+            public EmmDeviceCfg doInTransaction(TransactionStatus arg0) {
+            }
+        });
+#+END_SRC
+2.
+#+BEGIN_SRC 
+ transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+            
+     @Override
+  protected void doInTransactionWithoutResult(TransactionStatus status) {}
+});
+#+END_SRC

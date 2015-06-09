@@ -7,12 +7,8 @@ sudo apt-get install mysql-server mysql-client
 mysql -uUSERNAME -p
 
 
-* command prompting learn
-1. auto_incement
+* command prompting learn  
    
-   
-
-
 * ERROR and Solution
 ** ERROR 1054 (42S22): Unknown column 'com.hwacom.ngtms.emm.fm.VendorRemote' in 'where clause'
 - cause
@@ -30,11 +26,45 @@ update `fme_definition` set `class_name`=`com.hwacom.ngtms.emm.fm.VendorRemote` 
  
 
 * install SQL 5.6 manually In Debian 7
+Sol 1:
+(It is  a very tired problems solutions)
 1. Download from oracal
 2. dpkg --content ***.deb
    Let's you know where  the package will be  installed.
 3. If you encounter "can't access errmsg.sys"
-   Solved: cp /opt/mysql/server-5.6/share/english/errmsg.sys /usr/share/mysql/errmsg.sys
-   (/opt/mysql/server-5.6 is the root dir where  mysql be installed.) 
+- solved
+  cp /opt/mysql/server-5.6/share/english/errmsg.sys /usr/share/mysql/errmsg.sys
+  (/opt/mysql/server-5.6 is the root dir where  mysql be installed.) 
 4. mysqld& (always in the dir /bin)
+
+Solv2:
+1. download apt Repository from 
+[[http://dev.mysql.com/downloads/repo/apt/][mySql APT Repository]]
+2. dpkg -i xxxx
+3. apt-get update
+4. apt-get install mysql-server5.6
+5. Successfully
+
+
+* User management
+** add user
+#+BEGIN_SRC 
+CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'mypass';
+CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypass';
+#+END_SRC
+- '%' : a wildcard symbol, that mean this account can access database from everywhere(domain).
+** setting privilige
+#+BEGIN_SRC 
+GRANT ALL ON *.* TO 'myuser'@'localhost';
+GRANT ALL ON *.* TO 'myuser'@'%';
+#+END_SRC
+
+* change binded address
+- In  my.cnf in /etc/mysql/ (debian),
+- modfify 
+#+BEGIN_SRC 
+bind-address        = xxx.xxx.xxx.xxx
+#+END_SRC
+
+
 

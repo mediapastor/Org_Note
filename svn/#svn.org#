@@ -1,5 +1,0 @@
-* Let svn auto remove file that have been removed
-+ svn st | grep ^! | awk '{print " --force "$2}' | xargs svn rm
-* Auto add all file
-- find * | xargs svn add --force
-b
