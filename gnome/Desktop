@@ -1,0 +1,24 @@
+
+-----------------------------------------------------------------------------------------------------------
+add application to favorite
+----------------------------------------------------------------------------------------------------------
+ 1. dconf read /org/gnome/shell/favorite-apps
+show: 
+['evolution.desktop', 'empathy.desktop', 'rhythmbox.desktop', 'libreoffice-writer.desktop', 'org.gnome.Nautilus.desktop', 'yelp.desktop']
+ 2. dconf write /org/gnome/shell/favorite-apps \ 
+"[firefox.desktop', 'evolution.desktop', 'empathy.desktop', 'rhythmbox.desktop', 'libreoffice-writer.desktop', 'org.gnome.Nautilus.desktop', 'yelp.desktop']"
+add firefox to favorite
+ 3. cd ~/.local/share/applications/
+ 4. vi firefox.desktop 
+ 5. write shell in firefox.desktop
+
+	[Desktop Entry]
+	Encoding=UTF-8
+	Version=1.0
+	Type=Application
+	NoDisplay=true
+	Exec=/home/crimsonfantasy/application/firefox/firefox %u
+	Name=Firefox
+	Comment=Custom definition for Firefox
+	Icon=/home/crimsonfantasy/application/firefox/browser/icons/mozicon128.png
+
