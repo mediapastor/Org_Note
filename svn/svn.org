@@ -3,9 +3,9 @@
 * Auto add all file
 - find * | xargs svn add --force
 * log 
-- watch the specified version
+---- watch the specified version
 svn log -r ${version}
-- watch n last log
+---- watch n last log
 - svn log -l 3
 * svn ignore
 - svn propedit svn:ignore {dictionary_name}
@@ -26,3 +26,11 @@ svn ci -m "My commit message" --targets targets.txt
 #+BEGIN_SRC 
 svn ci file1 file2 dir1/file3
 #+END_SRC
+* svn patch 
+Generate patch file
+1. svn diff > ~/fix_ugly_bug.diff
+
+Patch file  fie is placed  in your another  working copy.  In the root of your application now run:
+2. patch -p0 -i ~/fix_ugly_bug.diff
+* back to previous version
+  svn merge -r n:n-m; n:currect version, n-m the previous version

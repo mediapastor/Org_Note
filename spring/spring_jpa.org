@@ -1,15 +1,15 @@
 * specify  Query in transaction that  Spring manages
 http://hantsy.blogspot.tw/2013/11/auditing-with-hibernate-envers.html
+- Declaration 
 #+BEGIN_SRC 
-@Autowired
- PlatformTransactionManager transactionManager;
-TransactionTemplate transactionTemplate;
+@PersistenceContext
+EntityManager em;
 #+END_SRC
 
-add transaction callback
+- add transaction callback
 1. 
 #+BEGIN_SRC 
-transactionTemplate = new TransactionTemplate(transactionManager);
+TranscationTemplate transactionTemplate = new TransactionTemplate(transactionManager);
         // TransactionCallbackWithoutResult
         transactionTemplate.execute(new TransactionCallback<EmmDeviceCfg>() {
             @Override

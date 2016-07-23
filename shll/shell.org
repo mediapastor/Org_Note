@@ -1,0 +1,4 @@
+* grep 
+-- 往上2行 grep -B 2 
+nodup
+-- 可以遠端後, 執行的process不會因為登出而結束

@@ -1,0 +1,5 @@
+-- when update quality row in table , but be restricted
+e.g.
+set SQL_SAFE_UPDATES = 0;
+update fme_definition set enable = 0 ;
+機房設備需要設嘛？

@@ -1,0 +1,4 @@
+* Name Stratage
+In persistence.xml
+<property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+- value is the stratage implemented by developer.

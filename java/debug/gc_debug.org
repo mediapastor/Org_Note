@@ -1,0 +1,5 @@
+1. gc debug:
+-XX:MaxGCPauseMillis=800 -XX:InitiatingHeapOccupancyPercent=80 -XX:+AggressiveOpts -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/opt/tomcat/logs/heapdump-`date +%Y%m%d_%H%M%S`.hprof -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -Xloggc:/opt/tomcat/logs/gc.log_`date +%Y%m%d_%H%M%S`
+2. 等了解
+jmap -heap <pid>
+

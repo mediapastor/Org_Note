@@ -1,0 +1,21 @@
+* git show -name-only {commit version}, (List all of file commit in Git)
+rresult : 
+
+src/main/java/com/hwacom/ngtms/emm/fm/repository/EmmDeviceCfgRepository.java
+src/main/java/com/hwacom/ngtms/emm/fm/repository/JobOrderPartCfgRepository.java
+src/main/java/com/hwacom/ngtms/emm/fm/repository/PartCfgRepository.java
+src/main/java/com/hwacom/ngtms/emm/fm/repository/RepairJobOrderRepository.java
+src/main/java/com/hwacom/ngtms/emm/fm/repository/RepairJobOrderSpecification.java
+src/test/java/com/hwacom/ngtms/emm/fm/model/PartCfgTest.java
+src/test/java/com/hwacom/ngtms/emm/fm/model/RepairJobOrderTest.java
+src/test/java/com/hwacom/ngtms/emm/fm/remote/EmmRemoteImplTest.java
+src/test/java/com/hwacom/ngtms/emm/fm/repository/AbnormalPicRepositoryTest.java
+src/test/java/com/hwacom/ngtms/emm/fm/repository/DeviceAbnormalLevelRepositoryTest.java
+src/test/java/com/hwacom/ngtms/emm/fm/repository/EmmDeviceCfgRepositoryTest.java
+src/test/java/com/hwacom/ngtms/emm/fm/repository/JobOrderPartCfgRepositoryTest.java
+src/test/java/com/hwacom/ngtms/emm/fm/repository/PartCfgRepositoryTest.java
+src/test/java/com/hwacom/ngtms/emm/fm/repository/RepairJobOrderRepositoryTest.java
+src/test/java/com/hwacom/ngtms/hccluster/SimpleHzClient.java
+* undo reset
+- git reflog show 
+- git reset HEAD@{X}

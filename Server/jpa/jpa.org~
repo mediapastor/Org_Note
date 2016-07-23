@@ -1,4 +1,0 @@
-
-* annotation relativ with @entity class
-**  @GeneratedValue
-*** (strategy=GenerationType.AUTO)

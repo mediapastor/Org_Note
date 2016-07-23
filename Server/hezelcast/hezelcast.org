@@ -1,0 +1,8 @@
+* 1. 16 個 JVM 跑 Hcce
+* 2. Jconsole -> Remote process (ip:(jvm_port))
+* 3. putty to passwaord- passwaor-hwacom1234
+* 4. lookup -cpu usage
+* ctl+h -- look up thread of thread
+* 5 jstack look java thread dump , 
+* 6. kill -3 look up thread dump
+* 7  NccHzClientTestIntused to test whether someone cluster live?

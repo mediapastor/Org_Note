@@ -1,0 +1,15 @@
+-- when update quality row in table , but be restricted
+e.g.
+set SQL_SAFE_UPDATES = 0;
+update fme_definition set enable = 0 ;
+
+-------------------------------------------------------------
+-  show refered table having forign key with given table    -
+-------------------------------------------------------------
+SELECT 
+  TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME, REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME
+FROM
+  INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE
+  REFERENCED_TABLE_SCHEMA = 'ngtms' AND
+  REFERENCED_TABLE_NAME = 'vendor_cfg';
