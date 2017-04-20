@@ -1,0 +1,2 @@
+-- 找同時建立連線在8080的人數
+netstat -nap | grep 8080 |grep ESTABLISHED | wc -l

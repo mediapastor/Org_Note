@@ -13,3 +13,6 @@ FROM
 WHERE
   REFERENCED_TABLE_SCHEMA = 'ngtms' AND
   REFERENCED_TABLE_NAME = 'vendor_cfg';
+
+-- Import ,mysql dump
+source  D:/windows_bkup/1410001/Desktop/fenrir/work/¥æ¤j/18-01-2017.joiiup_health;

@@ -1,0 +1,14 @@
+SHOW GRANTS FOR joyce@118.163.53.131;
+** 有哪些user
+SELECT User,Host FROM mysql.user;
+** 找該使用者有哪些權限
+SHOW GRANTS FOR username@localhost;
+
+** 設定權限
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER ON `joiiup_health`.`c_game_trip_context` TO 'joyce'@'118.163.53.131' WITH GRANT OPTION;
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER ON `joiiup_health`.`c_game_trip_context_link` TO 'joyce'@'118.163.53.131' WITH GRANT OPTION;
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER ON `joiiup_health`.`c_game_trip_context_point` TO 'joyce'@'118.163.53.131' WITH GRANT OPTION;
+*** The GRANT OPTION privilege enables you to give to other users or remove from other users those privileges that you yourself possess. 
+
+*** 該使用者擁有設定table的權限
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY PASSWORD '$PASSWORD' WITH GRANT OPTION

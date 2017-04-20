@@ -1,0 +1,5 @@
+* show procedures
+show procedure status;
+* show content of procedure
+show create procedure {procedure_name};
+* 

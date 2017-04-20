@@ -1,0 +1,2 @@
+- 找過去一天內新增的檔案，並且計算這些檔案的大小總量
+find ./ -type f  -mtime  -1 -print0 | du -ch --files0-from=-

@@ -1,0 +1,23 @@
+- count 所有資料庫所有table row的總和。
+SELECT SUM(TABLE_ROWS) 
+     FROM INFORMATION_SCHEMA.TABLES 
+     WHERE TABLE_SCHEMA = 'nctu';
+
+-- time overlap, 找時間區段重複
+SELECT a.createdTime, a.startTime as a_start, a.endTime as a_end, b.startTime as b_start, b.endTime as b_end
+FROM user_exercise a
+JOIN user_exercise b on a.starttime <= b.endtime
+    and  a.userId = 16339 and b.userId = 16339 and  a.endtime >= b.starttime
+    and a.userExerciseId != b.userExerciseId order by a.starttime desc;
+
+
+-- 資料庫的資料總大小
+SELECT  sum(round(((data_length + index_length) / 1024 / 1024 / 1024), 2))  as "Size in GB"
+FROM information_schema.TABLES
+WHERE table_schema = 'joiisport_log';
+
+-- 資料庫內的某一個table的總大小
+
+SELECT  sum(round(((data_length + index_length) / 1024 / 1024 / 1024), 2))  as "Size in GB"
+FROM information_schema.TABLES
+WHERE table_schema = 'joiisport_log' and table_name = 'l_user_request_20170406_0500';

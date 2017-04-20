@@ -1,0 +1,4 @@
+-- 解決dead lock
+> show processlist;
+  -- 找到id 是pid,把可疑的用kill
+ 

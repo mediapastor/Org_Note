@@ -1,0 +1,8 @@
+* 某ノunix time, utc timestamp, long
+* よ獽琩高ノ: FROM_UNIXTIME (startTimeLong/1000) java琌millisecond,
+	SELECT FROM_UNIXTIME (startTimeLong/1000), startTimeLong, startTime from user_exercise where startTimeLong != 0 and startTime is not null ORDER BY startTimeLong DESC  limit 20;
+* Τぃ璶ノdateTime,狦╰参Τ拜肈:
+ 硑Θ: datTimetimeZone把σ╰参 timeZone, 盢穦ま癬
+ 1. What happens when you want to move your database to a server in another timezone? 
+ 2. What about daylight saving time? 
+ 3. Local time is one big YUCK.

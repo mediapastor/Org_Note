@@ -1,1 +1,12 @@
 * Install 
+
+* 怎麼讓tomcat的讀取不是在webapp內的aplication的靜態檔案
+	官網上有很多辦法，我試了很多個，目前這個有效
+	設定在: apache-tomcat-7.0.73\conf內的server.xml，在Host tag內加入	
+	<Context 
+		docBase="D:\eclipse_workspace\JoiiHealth15Svr\WebContent\files" 
+		path="/joiihealth/files" 
+	/>
+	如此，localhost:8080//joiihealth/files/xxx就會找
+	D:\eclipse_workspace\JoiiHealth15Svr\WebContent\files\xxx的檔案
+	(這種設定也能用來加入非在webappp下的web application)
