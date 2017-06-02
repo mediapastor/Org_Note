@@ -1,0 +1,4 @@
+* 如果你的jps看不到java的pid, 用sudo jps
+Java processes collect and save data in /tmp/hsperfdata*.
+If the user running the command such as jps or
+jstat does not have access to the directory (or /tmp filesystem), then it will fail to detect the JVMs.

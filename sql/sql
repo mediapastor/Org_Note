@@ -16,3 +16,7 @@ WHERE
 
 -- Import ,mysql dump
 source  D:/windows_bkup/1410001/Desktop/fenrir/work/¥æ¤j/18-01-2017.joiiup_health;
+
+-- dump data from production without lock all table
+mysqldump --single-transaction -u root  -p joiiup_health user_exercise > user_exercise.sql
+

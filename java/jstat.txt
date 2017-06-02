@@ -1,0 +1,12 @@
+* 開啟jstatd
+--建立一檔案
+grant codebase "file:${java.home}/lib/tools.jar" {
+   permission java.security.AllPermission;
+};
+-- 開啟
+jstatd -p 12345 -J-Djava.security.policy=jstatd.all.policy&
+
+
+* 觀看gc
+1. jps (查看lvmid)
+2. jstat -gcutil lvmid 
