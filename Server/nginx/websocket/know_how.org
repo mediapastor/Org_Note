@@ -1,0 +1,5 @@
+* default 是之前成功設定的範例
+* jsmpeg是設定展示影片的範例
+* 參考資料
+ - http://nginx.org/en/docs/http/websocket.html
+ - http://coolnull.com/4275.html

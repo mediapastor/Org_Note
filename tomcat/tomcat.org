@@ -10,3 +10,12 @@
 	如此，localhost:8080//joiihealth/files/xxx就會找
 	D:\eclipse_workspace\JoiiHealth15Svr\WebContent\files\xxx的檔案
 	(這種設定也能用來加入非在webappp下的web application)
+* tomcat jsession shared with mutil same subdomains
+ - 因為cookie在rfc定意下是不能對應多個domain
+ at /META-INFO 的 context root加入
+  <Context useHttpOnly="true" sessionCookiePath="/"
+  sessionCookieDomain=".55grandjinbao.com" >
+** 其他解法
+  - 做一個proxy, 對main-server, 請求時, 加入set-cookie:"domain=.xx.yyy"
+  - 在proxy代理回傳的msg的header的set-cookie中補上domain=.xx.yyy
+

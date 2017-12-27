@@ -1,0 +1,2 @@
+* thread dump
+jstack -l JAVA_PID > jstack.out

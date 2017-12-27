@@ -1,5 +1,17 @@
+* git initial config 
+** user  info
+ git config --global user.name "John Doe"
+ git config --global user.email johndoe@example.com
+** editor
+ git config --global core.editor emacs
+** merger tool
+ git config --global merge.tool vimdiff
+ tool option: kdiff3、tkdiff、meld、xxdiff、emerge、vimdiff、gvimdiff、ecmerge及opendiff
+** show config list
+ git config --list
+
 * git show -name-only {commit version}, (List all of file commit in Git)
-rresult : 
+result : 
 
 src/main/java/com/hwacom/ngtms/emm/fm/repository/EmmDeviceCfgRepository.java
 src/main/java/com/hwacom/ngtms/emm/fm/repository/JobOrderPartCfgRepository.java
@@ -17,5 +29,60 @@ src/test/java/com/hwacom/ngtms/emm/fm/repository/PartCfgRepositoryTest.java
 src/test/java/com/hwacom/ngtms/emm/fm/repository/RepairJobOrderRepositoryTest.java
 src/test/java/com/hwacom/ngtms/hccluster/SimpleHzClient.java
 * undo reset
-- git reflog show 
-- git reset HEAD@{X}
+** local reset
+ - git reflog show 
+ - git reset --hard HEAD@{X}
+** remote reset
+ - git reset --hard {hash}
+ - git push -f origin master
+
+* branch 
+** fetch remote branch
+  git checkout -b  add_for_star_paradise
+** create feature, a branch from another branch(not master)
+ git checkout -b $feature_name $antother_branch
+
+* about log
+ - git log --all --grep='隨機'
+ 
+* about tag
+** release version naming 
+http://semver.org/
+** show tag
+ - got tag
+ - git tag -l 'v1.4.2.*'
+** add tag
+ - git tag -a v1.4 -m 'my version 1.4'
+** push tag
+ - git push --tags
+** git delete tah
+ - git tag -d tagname
+** git delete tag
+ - git tag $new $old
+ [1]  https://git-scm.com/book/zh-tw/v1/Git-%E5%9F%BA%E7%A4%8E-%E6%A8%99%E7%B1%A4
+* git diff
+** - show name only
+ git diff  f3204eae9c62904dc55a94a1e8329fd6349ade70 9bbe043810c97c958fce77b6e77984d172ea4800 --name-only
+** have gui support
+  gitk  f3204eae9c62904dc55a94a1e8329fd6349ade70 9bbe043810c97c958fce77b6e77984d172ea4800 --name-only
+
+* git mirror a repository
+git clone --mirror git@example.com/upstream-repository.git
+cd upstream-repository.git
+git push --mirror git@example.com/new-location.git
+[ref] http://blog.plataformatec.com.br/2013/05/how-to-properly-mirror-a-git-repository/
+* git server
+** log
+# 查看所有的logs; 按 Ctrl-C 退出
+sudo gitlab-ctl tail
+
+# 拉取/var/log/gitlab下子目录的日志
+sudo gitlab-ctl tail gitlab-rails
+
+# 拉取某个指定的日志文件
+sudo gitlab-ctl tail nginx/gitlab_error.log
+
+https://docs.gitlab.com.cn/omnibus/settings/logs.html
+* delete remove branch
+ - git push --delete origin remote_branch_name
+

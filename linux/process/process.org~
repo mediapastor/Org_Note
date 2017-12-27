@@ -1,0 +1,2 @@
+* 看process 開啟哪些資源
+ls -l /proc/103596/fd 

@@ -1,0 +1,6 @@
+* jvm 加 keystore
+sudo keytool -importcert -file /etc/nginx/cert.crt  -alias nginix  -keystore cacerts
+** handle issues
+*** SSLException : hostname in certificate didn't match 
+- change host name mapping in /etc/hosts
+- [ref] https://ping.force.com/Support/PingIdentityArticle?id=kA3400000008RpaCAE

@@ -1,0 +1,6 @@
+* public/ private key authentication
+1. generate public/pricate key 
+   ssh-keygen -t rsa
+2. put public key to server: example
+ ssh-copy-id -i /Users/mango/.ssh/id_rsa.pub root@127.0.0.1 -p 10032
+

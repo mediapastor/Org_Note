@@ -1,0 +1,7 @@
+# 建立Java Exetnsion注意事項
+ 參考文件http://docs2x.smartfoxserver.com/ExtensionsJava/writing-extensions
+   1. 打包jar file放置game server的extension資料夾下的某一指定資料夾
+   2. 上/admin指定zone , 並且指定該zone引用你的extension
+   3. server重起
+  注意事項：
+   1. 打包的war file, 必須以xxxExtension為名子

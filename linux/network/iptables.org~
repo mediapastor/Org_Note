@@ -1,0 +1,2 @@
+* reject port
+sudo iptables -I INPUT -p udp  --dport 99999 -j REJECT

@@ -1,0 +1,8 @@
+# emacsclient
+ps cax | grep emacsclient > /dev/null
+if [ $? -eq 0 ]; then
+ echo "emacsclient  is running."
+else
+ echo "emacsclient is not running."
+ emacsclient --alternate-editor="" -c "$@" &
+fi

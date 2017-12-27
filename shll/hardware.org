@@ -1,0 +1,10 @@
+* cpu
+** Linux: Find Number of CPU Cores Command
+*** shows the number of processing units available:
+#+BEGIN_SRC 
+ nproc
+#+END_SRC
+*** gathers CPU architecture information
+#+BEGIN_SRC 
+ lspci
+#+END_SRC

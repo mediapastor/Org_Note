@@ -1,0 +1,6 @@
+
+* 關於loadbalance 設定, 官方網有明確介紹 [1]
+** Configuring Basic Session Persistence [1]
+- 敘述tomcat
+- strick session, 建立之後, 會一直指定由某一台機器服務
+[1] https://www.nginx.com/resources/deployment-guides/load-balance-apache-tomcat/

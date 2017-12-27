@@ -1,0 +1,13 @@
+* 定期執行
+** crontab
+*** 新增
+   - crontab -e
+   - 新增範例
+#+BEGIN_SRC 
+*/10 * * * * root /home/jumbo/server/sql_shell/clean_boardcastboard.sh
+#+END_SRC   
+
+                                                                                               
+*** 查詢log
+1. grep CRON /var/log/syslog
+

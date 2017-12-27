@@ -2,3 +2,7 @@
 -- 往上2行 grep -B 2 
 nodup
 -- 可以遠端後, 執行的process不會因為登出而結束
+* sync 同步資料夾
+rsync -av -e ssh  ./  jumbo@vm:/home/jumbo/server/table_simulator
+rsync  -avz  /home/crimsonfantasy/Desktop/work/server/jinbo-games/game-server-niu2/src/main/resources/config/niu2 /usr/local/smart_fox/SFS2X/config/niu2
+

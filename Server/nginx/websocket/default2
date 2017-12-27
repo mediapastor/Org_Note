@@ -1,0 +1,30 @@
+server {
+  listen 449;
+  server_name ws.rep;
+ 
+  location /av1 {
+    proxy_pass http://192.168.121.227:8084/;
+    proxy_redirect off;
+ 
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+  }
+ 
+  location /av2 {
+    proxy_pass http://192.168.121.227:8086/;
+    proxy_redirect off;
+ 
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+  }
+ 
+  location /av3 {
+    proxy_pass http://192.168.121.227:8088/;
+    proxy_redirect off;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+  }
+}

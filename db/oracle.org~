@@ -1,0 +1,29 @@
+* show table size
+ -- Tables + Size MB
+ select owner, table_name, round((num_rows*avg_row_len)/(1024*1024)) MB 
+ from all_tables 
+ where owner not like 'SYS%'  -- Exclude system tables.
+ and num_rows > 0  -- Ignore empty Tables.
+ order by MB desc -- Biggest first.
+ ;
+* data relative query
+** SELECT TO_CHAR(sysdate, 'YYYY/MM/DD') FROM dual;
+** 取得星期幾
+Sunday=1, Monday=2, ...
+SQL> SELECT TO_CHAR(sysdate, 'D') FROM dual;
+** DDD 一年的第幾天
+SELECT TO_CHAR(sysdate, 'DDD') FROM dual;
+** WW 一年的第幾週
+SELECT TO_CHAR(sysdate, 'WW') FROM dual;
+** 一月的第幾週
+ SELECT TO_CHAR(sysdate, 'W') FROM dual;
+** 24 DATE TIME
+6. YYYY/MM/DD HH24:MI:SS AM
+SQL> SELECT TO_CHAR(sysdate, 'YYYY/MM/DD HH24:MI:SS AM') FROM dual;
+YYYY 年
+MM 月份
+DD 日期
+HH24/HH HH24表採24小時制
+MI 分鐘
+SS 秒數
+AM/PM 顯示上/下午

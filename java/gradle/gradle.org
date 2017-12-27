@@ -1,0 +1,13 @@
+* import local jar
+//http://wenshanren.org/?p=327
+ at repository:
+ #+BEGIN_SRC java
+   flatDir {
+          dirs 'libs'
+
+              }
+ #+END_SRC
+ at dependencies:
+#+BEGIN_EXAMPLE 
+compile name : 'sfs2x', version: '2.1.3'
+#+END_EXAMPLE 

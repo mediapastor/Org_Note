@@ -1,0 +1,5 @@
+
+* crontab
+ vim /etc/crontab
+ # example 加入這一行去！, ntp校時
+ 10 5 * * * root (/usr/sbin/ntpdate tock.stdtime.gov.tw && /sbin/hwclock -w) &> /dev/null

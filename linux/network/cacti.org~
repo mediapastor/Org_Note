@@ -1,0 +1,13 @@
+* install
+ sudo apt-get install apache2 mysql-server php5 libapache2-mod-php5
+ 
+ # A useful open source tool for storage and retrieval of time series data.
+ sudo apt-get -y install rrdtool
+
+ sudo apt-get -y install snmp snmpd
+ 
+ sudo apt-get -y install cacti cacti-spine
+
+ sudo /etc/init.d/snmpd start
+
+ agentAddress  udp:10.140.0.2:161

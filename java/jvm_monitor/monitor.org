@@ -1,0 +1,6 @@
+* thread dump
+ jstack -l JAVA_PID > jstack.out
+* jstack optput discription:
+- nid : native thread id
+- 
+

@@ -1,0 +1,88 @@
+* show table size
+ -- Tables + Size MB
+ select owner, table_name, round((num_rows*avg_row_len)/(1024*1024)) MB 
+ from all_tables 
+ where owner not like 'SYS%'  -- Exclude system tables.
+ and num_rows > 0  -- Ignore empty Tables.
+ order by MB desc -- Biggest first.
+ ;
+* data relative query
+** SELECT TO_CHAR(sysdate, 'YYYY/MM/DD') FROM dual;
+** 取得星期幾
+Sunday=1, Monday=2, ...
+SQL> SELECT TO_CHAR(sysdate, 'D') FROM dual;
+** DDD 一年的第幾天
+SELECT TO_CHAR(sysdate, 'DDD') FROM dual;
+** WW 一年的第幾週
+SELECT TO_CHAR(sysdate, 'WW') FROM dual;
+** 一月的第幾週
+ SELECT TO_CHAR(sysdate, 'W') FROM dual;
+** 24 DATE TIME
+6. YYYY/MM/DD HH24:MI:SS AM
+SQL> SELECT TO_CHAR(sysdate, 'YYYY/MM/DD HH24:MI:SS AM') FROM dual;
+YYYY 年
+MM 月份
+DD 日期
+HH24/HH HH24表採24小時制
+MI 分鐘
+SS 秒數
+AM/PM 顯示上/下午
+* sql cursor template
+#+BEGIN_SRC 
+DECLARE
+  difference         INTEGER;
+  sqlstmt            VARCHAR2(255) ;
+  sqlstmt2           VARCHAR2(255) ;
+  sqlstmt3           VARCHAR2(255) ;
+  sequenceValue      NUMBER;
+  sequencename       VARCHAR2(30) ;
+  sequencelastnumber INTEGER;
+  CURSOR allseq
+  IS
+    SELECT sequence_name, last_number FROM user_sequences ORDER BY sequence_name;
+BEGIN
+  DBMS_OUTPUT.enable(32000) ;
+  OPEN allseq;
+  LOOP
+    FETCH allseq INTO sequencename, sequencelastnumber;
+    EXIT
+    WHEN allseq%NOTFOUND;
+    sqlstmt  := 'ALTER SEQUENCE ' || sequencename || ' INCREMENT BY ';
+    --Assuming: <tablename>_id is <sequencename>
+    sqlstmt2 := 'select (nvl(Max(ID),0) - :1)+1 from ' || sequencename;
+    DBMS_OUTPUT.PUT_LINE(sqlstmt2);
+    --Attention: makes use of user_sequences.last_number --> possible cache problems!
+    -- sequence_name map to :1 in statement sqlstmt2
+    EXECUTE IMMEDIATE sqlstmt2 INTO difference USING sequencelastnumber;
+    DBMS_OUTPUT.PUT_LINE('difference' || difference) ;
+    END IF;
+  END LOOP;
+  CLOSE allseq;
+END;
+#+END_SRC
+* show client  connected to DB
+需要dba權限
+SELECT * from v$session v where v.schemaname = 'JBGAME'; 
+* change password
+1. alter user jbgame identified by new_password;
+   密碼過期, 或更改密碼可用這招
+
+* install sqlplus
+1. sudo apt-get install libaio1 libaio-dev
+2. edit ~/.bashrc
+#+BEGIN_SRC 
+export ORACLE_HOME=/home/jumbo/server/sqlplus/instantclient_12_2
+export LD_LIBRARY_PATH=$ORACLE_HOME
+export PATH=$PATH:$ORACLE_HOME
+#+END_SRC
+3.
+link: http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
+download:
+instantclient-basic-linux.x64-11.2.0.3.0.zip
+instantclient-sqlplus-linux.x64-11.2.0.3.0.zip
+instantclient-sdk-linux.x64-11.2.0.3.0.zip
+4. sqlplus login example 
+#+BEGIN_SRC 
+sqlplus jbgame/jbgame@192.168.18.111:49161/XE
+#+END_SRC
+

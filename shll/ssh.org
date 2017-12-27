@@ -1,0 +1,59 @@
+* rsa 登入申辦方式
+** 在local執行 ssh-keygen -t rsa -f ~/.ssh/my-ssh-key -C [USERNAME]
+ method 1.
+ - USERNAME是你remote target的使用者名稱
+ - public and private key 會放在本地的 ~/.ssh/內
+ method 2:
+ - cd  ~/.ssh
+ - ssh-keygen -b 4096
+** 把本機的public key 複製加入remote server的~/.ssh/authorized_keys檔案尾端
+** 已經可以連線了
+ - 如果你是拿別人給的private key, 可以指定private key, 可以用ssh -i {private key file}, 指定pk檔案
+** public key/ private key 交換設定（快速）
+1. generate key
+ - ssh-keygen -t rsa
+2. copy public key to server
+ -  ssh-copy-id -i ~/.ssh/id_rsa.pub user1@$ip 
+** alias ssh's host name
+1. edit config
+- vi ~/.ssh/config
+2. add host alias, given port
+   #+BEGIN_SRC 
+Host fakehost1
+Hostname realhost
+
+Host fakehost2
+Hostname realhost
+Port xxx
+
+Host fakehost3
+Hostname realhost   
+   #+END_SRC
+** bad own or permision on ~/.ssh/config
+1. I needed to have rw for user only permissions on config. This fixed it.
+#+BEGIN_SRC 
+chmod 600 ~/.ssh/config
+#+END_SRC
+2. As others have noted below, it could be the file owner. (upvote them!)
+#+BEGIN_SRC 
+chown $USER ~/.ssh/config
+#+END_SRC
+** pass through the gateway
+*** use tt
+Instead of typing two ssh command, I can type the following all-in-one 
+command. This is useful for connecting to FooServer via
+ firewall called ‘Jumphost’ as the jump host:
+#+BEGIN_SRC 
+ssh -tt xxx@gateway ssh -tt xxx@targetserver
+#+END_SRC
+- The -t option passed to the ssh command force pseudo-tty allocation. 
+This can be used to execute arbitrary screen-based programs on a remote machine.
+ Multiple -tt options force tty allocation, even if ssh has no local tty.
+
+*** update ~.ssh/config
+#+BEGIN_SRC 
+Host fooserver
+HostName FooServer
+User vivek
+ProxyCommand ssh vivek@Jumphost nc %h %p
+#+END_SRC

@@ -1,0 +1,19 @@
+* 安裝docker會遇到的問題
+** Solving Docker permission denied while trying to connect to the Docker daemon socket
+   - The error message tells you that your current user can’t access the docker engine, because you’re lacking permissions to access the unix socket to communicate with the engine.
+     - sulotion: sudo usermod -a -G docker $USER
+** 創立container, 給定指定的ip
+ 1. docker network ls
+    - 會看到bridge, docker default 的 network interface
+    - ifconfig 看的到他的
+ 2.  docker network create --driver bridge --subnet 172.18.0.0/16 oracle_db_net
+    - 創立自己的docker 網路
+    - oracle_db_net 是該網路名稱
+ 3. docker run --net oracle_db_net --ip 172.18.0.6 -d -p 49160:22 -p 49161:1521 -v $CONTAINER_HOME/share/data:/u01/app/oracle --name db sath89/oracle-xe-11g
+    - 開始new image
+ [1]: docker doc: https://docs.docker.com/engine/userguide/networking/
+
+** 進入docker instanse 
+ 1. docket ps -a
+ 2. docker exec -it [container id] bash
+

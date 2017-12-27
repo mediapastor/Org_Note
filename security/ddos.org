@@ -1,0 +1,45 @@
+* Fail2Ban
+ 分析access log, 把可以的ban掉(或者設定想要的做的事情) 
+** setting
+*** add config module to /etc/fail2ban/jail.local
+#+BEGIN_SRC
+[tomcat]
+enabled  = true
+port     = http,https,8080,8443
+filter   = tomcat
+logpath  = /var/log/tomcat7/localhost_access_log.txt
+maxretry = 3
+#+END_SRC
+*** wrtie /etc/fail2ban/filter.d/tomcat.conf
+#+BEGIN_SRC 
+# Fail2Ban filter for Tomcat
+[INCLUDES]
+[Definition]
+failregex = ^.*(GET|POST|HEAD).*/servletname.*	    
+ignoreregex = 
+#+END_SRC
+*** wrtie /etc/fail2ban/action.d/tomcat.conf
+#+BEGIN_SRC 
+[INCLUDES]
+[Definition]
+actionstart =
+actionstop =
+actioncheck = 
+actionban = echo " banned $(date "+%%Y%%m%%d %%T")" >> /home/username/output.txt
+actionunban = echo " un-banned $(date "+%%Y%%m%%d %%T")" >> /home/username/output.txt
+[Init]
+#+END_SRC
+*** write crontab to cp access localfile
+#+BEGIN_SRC 
+sudo crontab -e 
+00 00 * * *  cp /home/jumbo/server/apache-tomcat-7.0.37/logs/localhost_access_log.$(/bin/date +\%Y-\%m-\%d).txt /var/log/tomcat7/localhost_access_log.txt
+#+END_SRC
+
+** test regex expression
+#+BEGIN_SRC 
+fail2ban-regex  --print-all-match localhost_access_log.txt '<HOST>.*.jsp'
+#+END_SRC
+** reference
+ 1. https://www.digitalocean.com/community/tutorials/how-fail2ban-works-to-protect-services-on-a-linux-server 
+ 2. https://www.upcloud.com/support/installing-fail2ban-on-ubuntu-14-04/
+ 3. https://asciilog.wordpress.com/2015/05/25/using-fail2ban-with-tomcat/

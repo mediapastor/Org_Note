@@ -1,0 +1,4 @@
+* dump memory, show memory leak issues from app
+1. jmap -dump:file=<file_name> <pid>
+2. use eclipse Java memory analyzer tool to detect memory leak.
+[1] http://www.technologist-work.com/2015/09/interpretation-of-jstat-heap-memory-to-suspect-java-memory-leak/

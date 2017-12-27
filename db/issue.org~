@@ -1,0 +1,11 @@
+* 建立連線很慢怎麼辦：
+** 遇過狀況linux 上random bit拿不到
+Oracle JDBC 11g 需要40bytes的random bit, 從/dev/random獲得
+/dev/random 需要是on-time pad or 鍵盤事件產生的random值.
+這些random值會被放在kernel的entropy pool內
+我們可以從
+cat /proc/sys/kernel/random/entropy_avail
+cat /proc/sys/kernel/random/poolsize
+查看目前系統有多少bits的entropy pool
+如果發現entropy_avail數量少於320bit, 不足oracle jdbc driver需要的40bytes的random number
+oracle jdbc 就會被blocked [ref: man 4 random], 直到有足夠的40bytes的random value給oracle driver.

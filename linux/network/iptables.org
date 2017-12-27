@@ -1,0 +1,7 @@
+* reject port
+sudo iptables -A INPUT -p udp/tcp  --dport 99999 -j REJECT
+* list rule
+sudo iptables -L INPUT -n --line-number
+* delete
+ 1. sudo iptables -L INPUT -n --line-number (看行號）
+ 2. sudo iptables -D INPUT 3（3是行號)

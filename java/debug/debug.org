@@ -6,4 +6,4 @@ Command:
   請使用 top 監視 java process 的 cpu/mem 狀態，按 shift +h  可監視 所有 thread 的狀態
   在top發現異常使用資源的 thread 後，請將其 pid 轉為 16 進位，並在 hcClusterThread.txt
   內找到對應的thread stack trace, 如此就可知道那段程式異常使用 cpu / mem 資源
-*用gc viewer看gclog
+ *用gc viewer看gclog

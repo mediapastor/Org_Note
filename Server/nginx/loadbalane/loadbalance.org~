@@ -1,0 +1,4 @@
+
+* 關於loadbalance 設定, 官方網有明確介紹
+https://www.nginx.com/resources/deployment-guides/load-balance-apache-tomcat/
+** Configuring Basic Session Persistence

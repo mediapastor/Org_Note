@@ -1,0 +1,10 @@
+* 定期執行
+** crontab
+*** 新增
+   - crontab -e
+   - 新增範例
+#+BEGIN_SRC 
+*/10 * * * * /home/jumbo/server/sql_shell/clean_boardcastboard.sh
+#+END_SRC   
+
+                                                                                               

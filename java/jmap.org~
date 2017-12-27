@@ -1,0 +1,3 @@
+* dump memory
+1. jmap -dump:file=<file_name> <pid>
+2. use eclipse Java memory analyzer tool to detect memory leak.

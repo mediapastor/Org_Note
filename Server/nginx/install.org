@@ -1,0 +1,7 @@
+* install
+** centos 6
+intsall EPRL
+ 1. sudo yum install epel-release
+ 2. sudo yum install nginx
+start ngnix
+ 1. sudo /etc/init.d/nginx start

@@ -1,0 +1,8 @@
+
+* 2台機器無法連接
+ubuntu解法
+1. 在server上查詢hostname -i, 得知主機對外的ip是什麼？！ 如果不是外網的ip就有問拉
+2. hostname 查詢目前的host叫啥名子
+3. 看/etc/hosts內你的hostname對應的ip是什麼？ 這會影響rmi server對client的回應,
+ 如果hostname是hh, 檔定的ip是127.0.1.1, 那麼server就會回傳127.0.1.1給client, 而client在調用rmi api
+就會造成無法連到正確的server的錯誤, 所以你必須將hostname,對應的ip改為對外可access的數字

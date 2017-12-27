@@ -1,0 +1,21 @@
+* 改mac address的機制？
+* load balance : thread romo  server 切一半
+  有四種方式
+* create server
+(GUI: ADC 底下) 
+1. server => create server
+ CLI: slb server xxxxx
+* service group 
+ - group (一堆主機), 某一個port對應該組機,
+ - cli: 
+* vip 對外ip
+vitual server 
+* log
+ - sh session 看request path
+ - 
+
+* architecture
+ 1. in-line, L3, i/o 出入aten
+ 2. destination nit, client ->a->real server -> client
+ - 要做 source nat
+ 3. dsr

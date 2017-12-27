@@ -1,0 +1,17 @@
+* config
+** 1.
+- sudo apt-get update
+- sudo apt-get install nginx
+** 2.
+   nginx -v
+** 3.
+cd /etc/nginx
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/cert.key -out /etc/nginx/cert.crt
+** 4. 
+- back up /etc/nginx/sites-enabled/default
+- copy default /etc/nginx/sites-enabled/default
+** 5 service restart
+service nginx restart
+** reference
+[1] https://www.digitalocean.com/community/tutorials/how-to-configure-nginx-with-ssl-as-a-reverse-proxy-for-jenkins
+[2] https://www.digitalocean.com/community/tutorials/how-to-configure-nginx-with-ssl-as-a-reverse-proxy-for-jenkins

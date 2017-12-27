@@ -1,0 +1,58 @@
+* 安裝docker會遇到的問題
+** Solving Docker permission denied while trying to connect to the Docker daemon socket
+   - The error message tells you that your current user can’t access the docker engine, because you’re lacking permissions to access the unix socket to communicate with the engine.
+     - sulotion: sudo usermod -a -G docker $USER
+** 創立container, 給定指定的ip
+ 1. docker network ls
+    - 會看到bridge, docker default 的 network interface
+    - ifconfig 看的到他的
+ 2.  docker network create --driver bridge --subnet 172.18.0.0/16 oracle_db_net
+    - 創立自己的docker 網路
+    - oracle_db_net 是該網路名稱
+ 3. docker run --net oracle_db_net --ip 172.18.0.6 -d -p 49160:22 -p 49161:1521 -v $CONTAINER_HOME/share/data:/u01/app/oracle --name db sath89/oracle-xe-11g
+    - 開始new image
+ [1]: docker doc: https://docs.docker.com/engine/userguide/networking/
+
+** 進入docker instanse 
+ 1. docket ps -a
+ 2. docker exec -it [container id] bash
+
+** bridge , 連接2個內網
+除了預設的 docker0 橋接器，使用者也可以指定橋接器來連接各個容器。
+
+在啟動 Docker 服務的時候，使用 -b BRIDGE或--bridge=BRIDGE 來指定使用的橋接器。
+
+如果服務已經執行，那需要先停止服務，並刪除舊的橋接器。
+
+$ sudo service docker stop
+$ sudo ip link set dev docker0 down
+$ sudo brctl delbr docker0
+
+然後建立一個橋接器 bridge0。
+
+$ sudo brctl addbr bridge0
+$ sudo ip addr add 192.168.5.1/24 dev bridge0
+$ sudo ip link set dev bridge0 up
+
+查看確認橋接器建立並啟動。
+
+$ ip addr show bridge0
+4: bridge0: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state UP group default
+    link/ether 66:38:d0:0d:76:18 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.5.1/24 scope global bridge0
+       valid_lft forever preferred_lft forever
+
+設定 Docker 服務，預設橋接到建立的橋接器上。
+
+$ echo 'DOCKER_OPTS="-b=bridge0"' >> /etc/default/docker
+$ sudo service docker start
+
+啟動 Docker 服務。 新建一個容器，可以看到它已經橋接到了 bridge0 上。
+
+可以繼續用 brctl show 命令查看橋接的訊息。另外，在容器中可以使用 ip addr 和 ip route 命令來查看 IP 位址設定和路由訊息。
+* BACKUP 
+** BACKUP VOLUMN
+   docker run --rm --volumes-from db -v /root/backup:/backup ubuntu  tar cvf /backup/backup.tar /u01/app/oracle
+   - 打包tar放在本地/root/backup/backup.tar; 
+   - /u01/app/oracle 是container db 的volumn;
+   - 可以用docker inspect db查看mount volumn的name

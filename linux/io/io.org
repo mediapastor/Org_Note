@@ -1,0 +1,11 @@
+* monite io performance
+- iostat
+- iozone
+- vmstat
+- sar
+** dstat disk usage statistic 
+example:
+#+BEGIN_SRC 
+dstat -tdD sda1
+#+END_SRC
+

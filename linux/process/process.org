@@ -1,0 +1,4 @@
+* 看某process開啟哪些資源
+ls -l /proc/103596/fd
+* look thread resources in process
+ls /proc/$(pid)/task/

@@ -1,0 +1,29 @@
+* install
+** snmp-mibs-downloader 
+ 1. apt-get install snmp-mibs-downloader 
+ 2. To configure net-snmp command-line to use the MIBS, edit /etc/snmp/snmp.conf and comment out the following line: 
+ 3. download-mibs
+**  apache mysql php5
+ sudo apt-get install apache2 mysql-server php5 libapache2-mod-php5
+** rrd tool
+  # A useful open source tool for storage and retrieval of time series data.
+  sudo apt-get -y install rrdtool
+** snmp, snmpd
+ # snmpd sever (agent)
+ # SNMP "agents" run on the server side, which listen for incoming SNMP requests from clients and provides responses
+ 1. sudo apt-get -y install snmp snmpd
+*** config smnpd 
+ vi /etc/snmp/snmpd.conf
+ # 讓snmpd listen某個網路interface, 目前這樣設定可以讓外部監控該主機
+ # 用snmpwalk -v1 -cpublic 104.155.197.189 
+ agentAddress  udp:10.140.0.2:161
+ # public 是一組key定義在
+ rocommunity public  default  
+
+** cacti
+  1. sudo apt-get -y install cacti cacti-spine
+  2. visit http://127.0.0.1/cacti
+  3. add monitor device. 你的裝置必須裝有snmp,snpmd軟體
+
+
+   
