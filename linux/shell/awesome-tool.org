@@ -1,0 +1,6 @@
+* A code searching tool:
+** ag: A code searching tool similar to ack, with a focus on speed.
+https://github.com/ggreer/the_silver_searcher
+*** example:
+ag -i xxx ./
+** ack

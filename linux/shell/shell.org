@@ -25,3 +25,13 @@ to be executed at a later time.
 
 
 
+* expect (remotely shell)
+*** install 
+sudo apt-get install tcl tk expect
+*** example:
+- 必須是/use/bin/expect 開頭
+- 一般本機shell 和 expect 不能同在一個script
+#+BEGIN_SRC 
+#!/usr/bin/expect 
+
+#+END_SRC

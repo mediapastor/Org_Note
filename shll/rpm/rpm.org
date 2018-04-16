@@ -1,0 +1,22 @@
+* uninstall
+- rpm -qa | grep  want_unstalled_name
+xxxxxx
+- rpm -e xxxx
+* 增加一個repository
+example: 
+ - vim /etc/yum.repos.d/atrpms.repo
+ - 如果我的想要repository是http://ftp-stud.fht-esslingen.de/Mirrors/atrpms/dl.atrpms.net/el6-x86_64/
+#+BEGIN_SRC 
+[atrpms]
+name=Fedora Core $releasever - $basearch - ATrpms
+baseurl=http://ftp-stud.fht-esslingen.de/Mirrors/atrpms/dl.atrpms.net/el$releasever-$basearch/atrpms/stable
+#gpgkey=http://ATrpms.net/RPM-GPG-KEY.atrpms
+enabled=1
+gpgcheck=0
+#+END_SRC
+ - sudo yum update
+* show repository list
+ - yum -v repolist | less
+* show all package in target repository
+ - yum --disablerepo="*" --enablerepo="epel" list available
+ 

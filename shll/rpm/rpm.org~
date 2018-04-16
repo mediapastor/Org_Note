@@ -1,0 +1,4 @@
+* uninstall
+- rpm -qa | grep  want_unstalled_name
+xxxxxx
+- rpm -e xxxx

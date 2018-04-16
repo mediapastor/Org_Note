@@ -1,0 +1,4 @@
+* find top 10 large find in currrent folder
+ #+BEGIN_SRC 
+  du -a /var | sort -n -r | head -n 10
+ #+END_SRC

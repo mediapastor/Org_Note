@@ -6,3 +6,10 @@ ubuntu解法
 3. 看/etc/hosts內你的hostname對應的ip是什麼？ 這會影響rmi server對client的回應,
  如果hostname是hh, 檔定的ip是127.0.1.1, 那麼server就會回傳127.0.1.1給client, 而client在調用rmi api
 就會造成無法連到正確的server的錯誤, 所以你必須將hostname,對應的ip改為對外可access的數字
+
+* rmi 不能穿越firewall
+原因:
+RMI generally won't work over a firewall,
+since it uses unpredictable ports 
+(it starts off on 1099, and then runs off with a random port after that).
+http://web.archive.org/web/20070517161338/http://www.cs.swan.ac.uk/~csneal/InternetComputing/Tunnelling.html

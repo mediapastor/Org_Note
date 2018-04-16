@@ -1,0 +1,4 @@
+* jumpc    : jump to previous insertion points
+[disable][emacs24|2018/3/29] 
+* dump-jump: jump to definition" package with support for multiple programming languages 
+** (setq dumb-jump-default-project "~/code") to change default project if one is not found (defaults to ~)

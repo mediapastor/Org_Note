@@ -1,0 +1,15 @@
+* os 流量觀看 iftop
+** ui說明:
+ 1.右邊3行流量分別是2s, 10s 40s 的流量
+** 操作
+[b]: on/off bar, 頭上的進度條
+[t]: 切換顯示內容: 
+ two line per host (上傳下載兩行顯示)
+ one line per host  (上傳下載單行顯示)
+ send traffic only 
+ receive traffic only
+[n] show domin name if able
+[p] show portq
+[N] 是否解析port所對應的服務
+** 客製化
+ wrtie .iftoprc file in root home

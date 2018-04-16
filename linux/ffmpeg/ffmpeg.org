@@ -1,0 +1,16 @@
+* 參數敘述
+** '-analyzeduration', '0',
+**  '-i', `${this.streamSource} live=1`,
+** '-f', 'mpegts',
+** '-codec:v', 'mpeg1video',
+** '-codec:a', 'mp2',
+** '-s', `${width}x${height}`,
+** '-b:v', '500k' : 輸出影片的檔案大小
+**  '-bf', '0',
+** '-an',
+** '-ar', '44100',
+** '-ac', '1',
+** '-b:a', '32k',
+**  '-r', '24',
+** '-muxdelay', '0.001',
+** `http://127.0.0.1:${streamPort}/${secret}/${width}/${height}/`;

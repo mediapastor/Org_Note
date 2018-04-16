@@ -1,0 +1,4 @@
+* show memory usage
+#+BEGIN_SRC 
+ ps aux --sort -rss
+#+END_SRC

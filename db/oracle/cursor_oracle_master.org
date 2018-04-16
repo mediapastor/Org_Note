@@ -1,0 +1,106 @@
+* 拜訪store procedure的 output cursor
+#+BEGIN_SRC 
+CREATE OR REPLACE PACKAGE RouletteBetReportSummary AS
+  PROCEDURE computeSummary(betResultId IN VARCHAR2, cursor_ OUT SYS_REFCURSOR);
+END RouletteBetReportSummary;
+/
+
+CREATE OR REPLACE PACKAGE BODY RouletteBetReportSummary
+AS
+  PROCEDURE computeSummary(betResultId IN VARCHAR2, cursor_ OUT SYS_REFCURSOR)
+  IS
+    resultSet RESULT_HEADER_SET;
+    /**暫存變數 */
+    /*押注時間*/
+    betTime   ROULETTE_BET_RESULT.CREATED_TIME%TYPE;
+    /** 訂單編號*/
+    ticketId  ROULETTE_BET_RESULT.BET_RESULT_ID%TYPE;
+    /* 總押注*/
+    totalBet  NUMBER;
+    /* 總得到的錢*/
+    totalGain NUMBER;
+
+    BEGIN
+      resultSet := RESULT_HEADER_SET();
+      SELECT
+        BET_RESULT_ID,
+        CREATED_TIME
+      INTO ticketId, betTime
+      FROM ROULETTE_BET_RESULT
+      WHERE BET_RESULT_ID = betResultId;
+
+      SELECT
+        sum(BET_MONEY),
+        sum(MONEY_GAINED)
+      INTO totalBet, totalGain
+      FROM ROULETTE_BET_RESULT_DETAIL
+      WHERE ROULETTE_BET_RESULT_FK = betResultId;
+
+      /*塞結果*/
+      resultSet.extend;
+      resultSet(1) := GameSummaryObject(ticketId, betTime, '', totalBet, totalGain);
+      /** output data */
+      OPEN cursor_ FOR
+      SELECT *
+      FROM TABLE (resultSet);
+    END;
+END RouletteBetReportSummary;
+
+/** 拜訪cursor, 2種方式**/
+DECLARE
+  output  SYS_REFCURSOR;
+  rec_emp GAMESUMMARYOBJECT;
+  refSet RESULT_HEADER_SET;
+  ticketId VARCHAR2(50);
+  betDate  TIMESTAMP;
+  game     VARCHAR2(50);
+  totalBet NUMBER;
+  totalWin NUMBER;
+  ss RESULT_HEADER_SET;
+  CURSOR tmpCursor is  select * from TABLE(ss); /**創造一樣的cursor型別*/
+  v_RESULT_HEADER_SET tmpCursor%ROWTYPE;
+BEGIN
+  RouletteBetReportSummary.COMPUTESUMMARY('ff808181627a01dd01627a2882a20010', output);
+  LOOP
+    FETCH output INTO ticketId, betDate, game, totalBet, totalWin;
+    EXIT WHEN output%NOTFOUND;
+    dbms_output.put_line('ticketI:' || ticketId);
+  END LOOP;
+  close output;
+
+  RouletteBetReportSummary.COMPUTESUMMARY('ff808181627a01dd01627a2882a20010', output);
+  LOOP
+    FETCH output INTO v_RESULT_HEADER_SET;
+    EXIT WHEN output%NOTFOUND;
+    dbms_output.put_line('ticketIDDD:' || v_RESULT_HEADER_SET.ticketId);
+  END LOOP;
+  close output;
+END;
+
+
+DROP TYPE RESULT_HEADER_SET;
+DROP TYPE GAMESUMMARYOBJECT;
+
+/**宣告回傳結果 */
+CREATE OR REPLACE TYPE GAMESUMMARYOBJECT IS OBJECT (
+  ticketId VARCHAR2(50),
+  betDate  TIMESTAMP,
+  game     VARCHAR2(50),
+  totalBet NUMBER,
+  totalWin NUMBER
+);
+
+CREATE OR REPLACE TYPE RESULT_HEADER_SET IS TABLE OF GAMESUMMARYOBJECT;
+
+
+-- SELECT *
+-- FROM ROULETTE_BET_RESULT
+-- WHERE BET_RESULT_ID = 'ff808181627a01dd01627a2882a20010';
+--
+-- SELECT
+--   sum(BET_MONEY),
+--   sum(MONEY_GAINED)
+-- FROM ROULETTE_BET_RESULT_DETAIL
+-- WHERE ROULETTE_BET_RESULT_FK = 'ff808181627a01dd01627a2882a20010';
+
+#+END_SRC

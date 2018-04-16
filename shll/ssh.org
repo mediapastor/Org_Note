@@ -18,17 +18,14 @@
 1. edit config
 - vi ~/.ssh/config
 2. add host alias, given port
-   #+BEGIN_SRC 
-Host fakehost1
-Hostname realhost
-
-Host fakehost2
-Hostname realhost
-Port xxx
-
-Host fakehost3
-Hostname realhost   
-   #+END_SRC
+#+BEGIN_SRC 
+Host alias-name                      # 用來連線的 alias 名稱
+HostName server.name                 # host domain 或 ip
+Port port-number                     # host 的 SSH port
+IdentitiesOnly yes                   # 使用指定的 key
+IdentityFile ~/.ssh/private_ssh_file.pem  # 指定 pem 或 pub 的 key 路徑
+User username-on-remote-machine      # 登入 SSH的 username
+#+END_SRC
 ** bad own or permision on ~/.ssh/config
 1. I needed to have rw for user only permissions on config. This fixed it.
 #+BEGIN_SRC 

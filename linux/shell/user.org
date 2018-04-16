@@ -1,0 +1,6 @@
+* add user to group 
+#+BEGIN_SRC 
+  sudo usermod -a -G docker $USER
+#+END_SRC
+
+

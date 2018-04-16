@@ -1,0 +1,2 @@
+* show process use which port
+ lsof -n -i | grep ${pid}

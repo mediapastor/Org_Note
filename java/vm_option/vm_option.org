@@ -1,0 +1,4 @@
+*  需要設定native memory used:
+#+BEGIN_SRC 
+ -XX:MaxDirectMemorySize 
+#+END_SRC

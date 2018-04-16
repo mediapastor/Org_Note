@@ -1,5 +1,40 @@
 
-* crontab
- vim /etc/crontab
+* 編輯crontab
+`** example 1
+1. crontab -e
  # example 加入這一行去！, ntp校時
  10 5 * * * root (/usr/sbin/ntpdate tock.stdtime.gov.tw && /sbin/hwclock -w) &> /dev/null
+   
+** example 2 (contab output redirect)
+1. crontab default 將輸出寄mail給你
+2. 不想寄mail, 將log pipe到檔案的寫法如下：
+#+BEGIN_SRC 
+*/1 * * * *  /home/jumbo/server/sql_shell/clean_boardcastboard.sh > /home/jumbo/server/sql_shell/sql_exec.log 2>&1
+#+END_SRC
+** 一個可執行的crontab 範例
+1. 需要開頭 
+ #+BEGIN_SRC 
+#!/bin/bash
+#+END_SRC
+2. 需要自己寫環境變數(env), ex: PATH
+
+一個範例:
+#+BEGIN_SRC 
+#!/bin/bash                                                                                                                                              
+#crontab requires head                                                                                                                                   
+#cron tab do not record aby system env, so i need to set by it myself                                                                                    
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/jumbo/server/sqlplus/instantclient_12_2:/home/jumbo/server/sql_shell             
+export ORACLE_HOME=/home/jumbo/server/sqlplus/instantclient_12_2                                                                                         
+export LD_LIBRARY_PATH=$ORACLE_HOME                                                                                                                      
+export PATH=$PATH:$ORACLE_HOME                                                                                                                           
+                                                                                                                                                         
+out=`sqlplus -s jbgame/jbgame@192.168.18.111:49161/XE <<EOF                                                                                              
+ set heading off feedback off verify off                                                                                                                 
+ DELETE from BROADCASTBOARD where READ_FLAG = 1;                                                                                                         
+ select count(*) from BROADCASTBOARD;                                                                                                                    
+       exit                                                                                                                                              
+EOF                                                                                                                                                      
+`                                                                                                                                                        
+echo $out >> /home/jumbo/server/sql_shell/sql_exec.log     
+ 
+ #+END_SRC

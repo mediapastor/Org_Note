@@ -1,3 +1,4 @@
+
 * show table size
  -- Tables + Size MB
  select owner, table_name, round((num_rows*avg_row_len)/(1024*1024)) MB 
@@ -106,14 +107,3 @@ EOF
 `                                                                                                                                                        
 echo $out >> /home/jumbo/server/sql_shell/sql_exec.log     
 #+END_SRC
-* -- Query --
-** show instance nam (SID)
-- login with sys
-- select instance_name from v$instance
-** query many process db can used
- - login with sys
- - select * from v$parameter where name='processes';
- - select * from V$RESOURCE_LIMIT where resource_name='processes';
-*** modified reource_limit
- - alter system set processes=300 scope=spfile; commit;
-

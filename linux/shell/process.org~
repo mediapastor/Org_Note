@@ -1,0 +1,2 @@
+* show process use which port
+* losf -n -i | grep ${pid}

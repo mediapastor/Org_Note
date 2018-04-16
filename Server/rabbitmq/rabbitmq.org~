@@ -1,0 +1,5 @@
+* add user
+#+BEGIN_SRC 
+rabbitmqctl add_user fenrir fenrir
+#+END_SRC
+
