@@ -1,0 +1,35 @@
+* gc 相關
+** 觀看gc
+[[https://docs.oracle.com/javase/1.5.0/docs/tooldocs/share/jstat.html#gc_option][jstate document]]
+jstat -gc $pid 
+----------------------------------------------------
+Garbage-collected heap statistics
+column  Description
+S0C	Current survivor space 0 capacity (KB).
+S1C	Current survivor space 1 capacity (KB).
+S0U	Survivor space 0 utilization (KB).
+S1U	Survivor space 1 utilization (KB).
+EC	Current eden space capacity (KB).
+EU	Eden space utilization (KB).
+OC	Current old space capacity (KB).
+OU	Old space utilization (KB).
+PC	Current permanent space capacity (KB).
+PU	Permanent space utilization (KB).
+YGC	Number of young generation GC Events.
+YGCT	Young generation garbage collection time.
+FGC	Number of full GC events.
+FGCT	Full garbage collection time.
+GCT	Total garbage collection time.
+
+** jvm argument 敘述
+1. [[http://www.oracle.com/technetwork/articles/java/vmoptions-jsp-140102.html][Java HotSpot VM Options (不包含java 8) (Oracle artical)]]
+2. [[https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html#BABHDABI][java argument document]]
+** java 8 設定經驗
+*** -Xms5m
+初始memory 
+*** -Xmx5m
+最大heap size
+*** -XX:+UseG1GC -XX:MaxMetaspaceSize=15m
+java 8才有, java 8移除了maxPermSize
+ - [[http://openjdk.java.net/jeps/122][see JEP122 ]]
+

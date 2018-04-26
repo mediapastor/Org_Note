@@ -107,13 +107,19 @@ EOF
 echo $out >> /home/jumbo/server/sql_shell/sql_exec.log     
 #+END_SRC
 * -- Query --
-** show instance nam (SID)
+** application query
+*** query by time condition
+select * from BAGAMECONFIRM where UID_A = 'kbmkpl10@KB' and CREATETIME > to_timestamp('20-04-2018 14:45:00', 'dd-mm-yyyy hh24:mi:ss');
+*** query and limit row num
+select * from BA_GAME_RESULT_SERVER where ROWNUM =1;
+** System
+*** show instance nam (SID)
 - login with sys
 - select instance_name from v$instance
-** query many process db can used
- - login with sys
- - select * from v$parameter where name='processes';
- - select * from V$RESOURCE_LIMIT where resource_name='processes';
-*** modified reource_limit
- - alter system set processes=300 scope=spfile; commit;
+*** query many process db can used
+  - login with sys
+  - select * from v$parameter where name='processes';
+  - select * from V$RESOURCE_LIMIT where resource_name='processes';
+**** modified reource_limit
+  - alter system set processes=300 scope=spfile; commit;
 

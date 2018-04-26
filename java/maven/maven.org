@@ -1,0 +1,31 @@
+* maven nexus repository server
+** 透過command line (gradle, maven) 上傳的步驟
+   注意事項:
+ 1. 第一個版本必須是x.x.x-SNAPSHOT, 之後才能放release
+ 2. snapshot只能放在snapshot的repository內, release一樣只能放在release
+ 3. 可以使用gradle maven plugin中的指令完成 
+    #+BEGIN_SRC 
+apply plugin: 'maven'
+
+/**
+ * https://docs.gradle.org/current/userguide/maven_plugin.html
+ */
+
+configurations {
+    deployerJars
+}
+
+uploadArchives {
+    repositories{
+        mavenDeployer {
+            configuration = configurations.deployerJars
+            repository(url:"http://192.168.18.134:8081/repository/maven-releases") {
+                authentication(
+                        userName: "admin",
+                        password: "admin123"
+                )
+            }
+        }
+    }
+}
+#+END_SRC

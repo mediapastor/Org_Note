@@ -22,9 +22,30 @@ BEGIN
 END;
 /
 #+END_SRC
+** ddl in storprocedure [注意]
+ddl 在store procedure 有特別的寫法: example
+[[file:ddl_in_store_procedure.sql][ddl {eg:truncate} in store procedure]]
+
+** exec DDL in procedure
+   what is DDL(Data Definition Language)?
+   用來定義資料庫、資料表、檢視表、索引、預存程序、觸發程序、函數等資料庫物件。
+   可以用來建立、更新、刪除 table,schema,domain,index,view
+   oracle使用ddl 必須連用execute immediate
+#+BEGIN_SRC 
+CREATE OR REPLACE PROCEDURE game_record_truncate IS
+  cc number;
+Begin
+    execute immediate 'TRUNCATE TABLE BULL2_BET_RESULT
+    PRESERVE MATERIALIZED VIEW LOG
+    REUSE STORAGE';
+END;
+#+END_SRC
+   注意： 
+1. execute immediate 內部只能有一個sql, 不能用分號隔開又用多個
+   see : [[%5B%5Boracle%20document%5D%5Bhttps://docs.oracle.com/cd/B28359_01/appdev.111/b28370/executeimmediate_statement.htm#LNPLS01317%5D%5D][oracle document]]
 * Job
 ** delete Job
--- 刪除JOB
+   -- 刪除JOB
 #+BEGIN_SRC 
 BEGIN
   dbms_job.remove(4);
@@ -48,7 +69,7 @@ begin
 end;
 #+END_SRC
 ** list user Job
--- 查詢USER JOB
+   -- 查詢USER JOB
 #+BEGIN_SRC 
 select * from user_jobs;
 #+END_SRC

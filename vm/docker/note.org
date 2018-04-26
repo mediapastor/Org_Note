@@ -11,8 +11,7 @@
     - oracle_db_net 是該網路名稱
  3. docker run --net oracle_db_net --ip 172.18.0.6 -d -p 49160:22 -p 49161:1521 -v $CONTAINER_HOME/share/data:/u01/app/oracle --name db sath89/oracle-xe-11g
     - 開始new image
- [1]: docker doc: https://docs.docker.com/engine/userguide/networking/
-
+    - docker doc: https://docs.docker.com/engine/userguide/networking/
 ** 進入docker instanse 
  1. docket ps -a
  2. docker exec -it [container id] bash
@@ -57,18 +56,50 @@ $ sudo service docker start
    - /u01/app/oracle 是container db 的volumn;
    - 可以用docker inspect db查看mount volumn的name
 * Guild line
-** docker run
+** command dockerrun
 *** 1. run as daemon
 #+BEGIN_SRC 
 sudo docker run -d -i -t -p 8080:18080 -p 9933:19933 d23bdf5b1b1b 
 #+END_SRC
 - -d : daemon
 - -i : interactive
-*** 2. 進入bash
+** 進入bash
 #+BEGIN_SRC 
 sudo docker run -d -i -t -p 18080:8080 -p 19933:9933 -p 15701:5701 -p 15702:5702 66579e2784b2 
 #+END_SRC
+** 需要對時和Zone對時
+*** docker 需要和主機對時:
+1. date 查看系統時間
+2. docker 指令同步host time
+   - 在docker run指令加上參數 -v /etc/localtime:/etc/localtime:ro
+*** docker 更改Zone 時間
+1. look current time zone
+ - cat /etc/timezone
+2. 看看系統有哪些time zone, ls /usr/share/zoneinfo/
+   #+BEGIN_SRC
+   你會看到/usr/share/zoneinfo/Asia/Taipai 檔案
+   #+END_SRC
+3. 把 /ect/timezone 更改成你要的zone
+   #+BEGIN_SRC
+   如： Asia/Taipai
+   #+END_SRC
 
-
-
-
+*** 在docker內的JVM時間不正常判斷
+以下2點會影響jvm Date or LocalDateTime的數值
+1. 確定date
+2. 確定tomeZone是你要的位置
+** Run remote shell outside docker 
+*** run shell of docker container in your shell script
+    use 'sh -c "some script" ' in docker exec 
+    notic: 
+1. If you run daemon service in target machine by remote shell, following sleep command avoid daemon not running.
+#+BEGIN_SRC 
+#!/bin/sh                                                                                                                 
+echo deployee to docker!!
+sudo docker exec -it niu1  sh  -c "./usr/local/stop_game_server.sh && sleep 2"
+sudo docker cp bull2-GameExtension.jar  niu1:/usr/local/bull2SmartFox/SFS2X/extensions/bull2/
+sudo docker cp mango-gameExtension-dependencies.jar  niu1:/usr/local/bull2SmartFox/SFS2X/extensions/__lib__/
+echo wait 3 seconds for starting server!!
+sudo docker exec -it niu1  sh  -c "./usr/local/start_game_server.sh && sleep 2"
+sudo docker exec -it niu1  sh  -c "tail -f /usr/local/logs/bull2/gameLog.log"
+#+END_SRC
