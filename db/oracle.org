@@ -123,3 +123,30 @@ select * from BA_GAME_RESULT_SERVER where ROWNUM =1;
 **** modified reource_limit
   - alter system set processes=300 scope=spfile; commit;
 
+* JSON
+** store machone
+Data Types for JSON Columns
+You can store JSON data in Oracle Database using columns whose data types are VARCHAR2, CLOB, or BLOB. The choice of which to use is typically motivated by the size of the JSON documents you need to manage:
+- Use VARCHAR2(4000) if you are sure that your largest JSON documents do not exceed 4000 bytes (or characters)Foot 1Footref .
+ If you use Oracle Exadata then choosing VARCHAR2(4000) can improve performance by allowing the execution of some JSON operations to be pushed down to Exadata storage cells, for improved performance.
+- Use VARCHAR2(32767) if you know that some of your JSON documents are larger than 4000 bytes (or characters) and you are sure than none of the documents exceeds 32767 bytes (or characters)Footref .
+ With VARCHAR2(32767), the first roughly 3.5K bytes (or characters) of a document is stored in line, as part of the table row. This means that the added cost of using VARCHAR2(32767) instead of VARCHAR2(4000) applies only to those documents that are larger than about 3.5K. If most of your documents are smaller than this then you will likely notice little performance difference from using VARCHAR2(4000).
+ If you use Oracle Exadata then push-down is enabled for any documents that are stored in line.
+- Use BLOB (binary large object) or CLOB (character large object) storage if you know that you have some JSON documents that are larger than 32767 bytes (or characters)Footref .
+* performance
+- 10萬比數
+ 1. 第一次
+  [2018-05-09 16:12:07] completed in 2ms
+  sql> select * from REPORT_GAME_SUMMARY where  UID_A = 'user-368'
+ 2. 第2次 
+  [2018-05-09 16:12:07] 1 row retrieved starting from 1 in 228ms (execution: 30ms, fetching: 198ms)
+  sql> select * from REPORT_GAME_SUMMARY where  UID_A = 'user-368'
+  [2018-05-09 16:12:32] 1 row retrieved starting from 1 in 66ms (execution: 17ms, fetching: 49ms)
+- 60萬比數
+ 1. 第一次
+  sql> select * from REPORT_GAME_SUMMARY where  UID_A = 'user-368'
+  [2018-05-09 16:15:17] 1 row retrieved starting from 1 in 274ms (execution: 217ms, fetching: 57ms)
+ 2. 第二次
+  sql> select * from REPORT_GAME_SUMMARY where  UID_A = 'user-368'
+  [2018-05-09 16:15:30] 1 row retrieved starting from 1 in 82ms (execution: 27ms, fetching: 55ms)
+

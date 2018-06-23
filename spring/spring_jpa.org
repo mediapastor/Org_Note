@@ -25,3 +25,8 @@ TranscationTemplate transactionTemplate = new TransactionTemplate(transactionMan
   protected void doInTransactionWithoutResult(TransactionStatus status) {}
 });
 #+END_SRC
+* connection pool
+- spring 喜歡 HikariCP [[[https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html][reference]]]
+ We prefer HikariCP for its performance and concurrency.
+ If HikariCP is available, we always choose it.
+

@@ -9,3 +9,22 @@
 rabbitmqctl add_user fenrir fenrir
 #+END_SRC
 
+* admin tool
+** 查詢被完成的東西
+sudo rabbitmqctl list_queues ${queue_name} messages_ready messages_unacknowledged
+** purge queue
+1.  sudo rabbitmqctl purge_queue ${queue_name}
+2. 怎麼刪都刪不掉的話： <這個動作會把queue移除, 之後還要在create回來>
+   sudo rabbitmqctl eval '{ok, Q} = rabbit_amqqueue:lookup(rabbit_misc:r(<<"/">>, queue, <<"generatingSummaryReport">>)), rabbit_amqqueue:delete_crashed(Q).'
+   sudo rabbitmqadmin  -V / declare queue  name=generatingSummaryReport 
+** 創建queue
+   1. 安裝rabbitmqadmin from https://www.rabbitmq.com/management-cli.html
+   2. sudo rabbitmqadmin  -V / declare queue  name=generatingSummaryReport 
+** connect 或是連不上的時候, 查用戶permissions
+*** 查詢permission: rabbitmqctl list_permissions
+*** 設置permission: rabbitmqctl set_permissions -p / fenrir  ".*" ".*" ".*"
+   
+** 
+** heartbeats
+- Detecting Dead TCP Connections with Heartbeats and TCP Keepalives
+https://www.rabbitmq.com/heartbeats.html

@@ -1,0 +1,13 @@
+* remove gpg-key 
+** rpm -qa gpg-pubkey \* --qf "%{version}-%{release} %{summary}\n"
+it will show
+ 7fac5991-4615767f gpg(Google, Inc. Linux Package Signing Key <linux-packages-keymaster@google.com>)
+ f6777c67-45e5b1b9 gpg(Adobe Systems Incorporated (Linux RPM Signing Key) <secure@adobe.com>)
+ b5f29883-50e31701 gpg(RPM Fusion nonfree repository for Fedora (20) <rpmfusion-buildsys@lists.rpmfusion.org>)
+ ae688223-50e31483 gpg(RPM Fusion free repository for Fedora (20) <rpmfusion-buildsys@lists.rpmfusion.org>)
+ 246110c1-51954fca gpg(Fedora (20) <fedora@fedoraproject.org>)
+** sudo rpm -e --allmatches gpg-pubkey-xxxxxxxx-xxxxxxxx
+For example if you want to delete the gpg-key from the Adobe
+ sudo rpm -e --allmatches gpg-pubkey-f6777c67-45e5b1b9
+
+

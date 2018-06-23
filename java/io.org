@@ -1,0 +1,4 @@
+* cp file performance banchmark
+  總結 [[[https://baptiste-wicht.com/posts/2010/08/file-copy-in-java-benchmark.html][reference]]]:
+  NIO 是最快的
+  native cp當檔案非常小時,速度非常slow

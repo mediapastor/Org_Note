@@ -1,0 +1,58 @@
+* DataJPaTest
+  The purpose of @DataTestJpa is to establish an environment for JPA testing. So if you are using Spring Data JPA writing tests of your repositories will be somehow simpler.
+This annotation provides configuration containing classes needed by JPA tests only so it is more lightweight than loading full-blown configuration of your application to test data repositories only.
+** What does the annotation do? A quick glance on its internals and we already know what is imported and configured for a test:
+
+    bootstraps test context by @BootstrapWith(SpringBootTestContextBootstrapper.class),
+    set transactional attributes on a test class using @Transactional,
+    imports cache configuration (@AutoConfigureCache) that can be enabled by providing spring.cache.type configuration property,
+    imports complete configuration that is needed by JPA tests (@AutoConfigureDataJpa),
+    imports configuration providing embedded database for tests (@AutoConfigureTestDatabase),
+    imports configuration providing TestEntityManager that helps to set up test data in a database (@AutoConfigureTestEntityManager).
+
+** Here are a couple of notes I made looking through those annotations:
+
+    If it is needed in test a cache can be enabled by spring.cache.type property with a value other than NONE
+    It is possible to provide a type of connection to a database and by this type, a type of database used in tests is meant. Values for this setting are taken from EmbeddedDatabaseConnection enum (H2, HSQLDB or Derby). You can do this in two ways:
+    with annotation on a test class: @AutoConfigureTestDatabase(connection = H2)
+    or in properties file: spring.test.database.connection: H2
+
+** By default NONE value is used and in this case, the first database’s type with its JDBC driver on a classpath is taken.
+
+    Replacement of a production data source can be defined with ANY (default one), AUTO_CONFIGURED and NONE values provided in similar ways as the type of connection:
+    with annotation on a test class: @AutoConfigureTestDatabase(replace = ANY)
+    or in properties file: spring.test.database.replace: ANY
+
+For ANY every production DataSource configured will be replaced with embedded one for tests. With AUTO_CONFIGURED only DataSources configured by properties will be replaced and the ones configured manually will not be touched. Behaviour of NONE is quite obvious – application’s DataSource will not be replaced.
+
+To check the annotation I played shortly with JPA tests and put the code to playing-with-spring on Github. It contains just a simple Book entity (with id and title fields) with its repository. There are two tests of the repository – one for the approach with @DataTestJpa and the second with – so called – previous approach.
+
+I know the example is trivial however even with such simplistic case I can say the new annotation is cool assistance when writing a test and I really like it. Thanks to this the code looks cleaner and I do not have to provide special properties to configure tests’ database. This means fewer places where a bug could show up.
+
+As I mentioned at the beginning @DataTestJpa annotation is just a one of tests improvements introduced in Spring Boot v1.4. If you are interested to see others check out this short summary.
+
+And the last thought at the end – know your tools you are using in your project, check their updates and look what new things they offer. Maybe there are gems that will make your programming life easier and better? 🙂
+** example
+#+BEGIN_SRC <Java>
+@RunWith(SpringRunner.class)
+@DataJpaTest
+//不換dataSource
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+public class GameConfigCacheTest {
+
+
+    @Autowired
+    GameConfigCache gameConfigCache;
+
+    @PersistenceContext(unitName = "jbWeb-persistence-unit")
+    private EntityManager entityManager;
+
+
+    @Test
+    public void getLegacyGameSetting() {
+        final LegacyGameSetting legacyGameSetting =
+                gameConfigCache.getLegacyGameSetting("kbtmphse@KB");
+        Assert.assertNotNull(legacyGameSetting);
+    }
+
+#+END_SRC

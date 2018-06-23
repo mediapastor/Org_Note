@@ -1,0 +1,10 @@
+* find key binding
+** M-x describe-bindings
+there are some other nice ways to see key bindings
+** M-x describe-prefix-map
+Lists all the bindings currently available, use isearch, occur, etc. to make good use of this list.
+** M-x describe-mode
+This shows all the bindings available from the current mode, you can use the display buffer as you would any other readonly Emacs buffer, for example you can search freely for strings etc.
+** M-x describe-minor-mode
+As well as giving you general info about the current mode, it will also list all the key bindings available.
+You will be prompted to enter the name of a minor mode, and then be shown info and key bindings for that minor mode.

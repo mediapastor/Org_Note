@@ -1,0 +1,6 @@
+* system-design
+https://github.com/donnemartin/system-design-primer
+* casual game design
+http://highscalability.com/blog/2010/9/21/playfishs-social-gaming-architecture-50-million-monthly-user.html
+* Queue Compare
+http://wiki.secondlife.com/wiki/Message_Queue_Evaluation_Notes#RabbitMQ

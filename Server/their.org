@@ -1,0 +1,2 @@
+1.
+http://wiki.secondlife.com/wiki/Message_Queue_Evaluation_Notes#RabbitMQ

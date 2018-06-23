@@ -1,0 +1,20 @@
+* problem
+** permission denied (open file or write)
+*** change nginx user
+ 1. vi /etc/nginx/nginx.conf
+ 2. user $yourUserName
+*** change file permission
+ 1. chmod 775 $fileName
+*** centos SELinux 在搞鬼
+**** 查看狀態SELinux
+ /usr/sbin/sestatus -v
+**** 關閉方法:
+ 1. setenforce 0 
+    臨時關閉, 不需重新開機
+ 2. vi /etc/selinux/config
+ #+BEGIN_SRC 
+  #SELINUX=enforcing
+ SELINUX=disabled
+ #+END_SRC
+ 
+

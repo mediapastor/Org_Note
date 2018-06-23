@@ -2,3 +2,5 @@
 #+BEGIN_SRC 
  -XX:MaxDirectMemorySize 
 #+END_SRC
+* Memory usage
+  -Xms5m -Xmx5m -XX:+UseG1GC -XX:MaxMetaspaceSize=15m

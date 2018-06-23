@@ -1,0 +1,2 @@
+* create project
+ grails create-app report-tool -profile rest-api

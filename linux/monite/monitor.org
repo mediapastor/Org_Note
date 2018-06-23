@@ -1,0 +1,12 @@
+* linux watch user open file
+ - cat /proc/sys/fs/file-max (max opened file)
+   3268085
+ - cat /proc/sys/fs/file-nr 
+   (4512 is cureent open file, 3269085 is max number of opened file)
+   4512	0	3268085
+* nproc是操作系统级别对每个用户创建的进程数的限制
+ - ps h -Led -o user | sort | uniq -c | sort -n
+   (查看用戶開了多少個process)
+ - ps -o nlwp,pid,lwp,args -u hdfs | sort -n 
+   (查看使用者hdfs開了多少個process)
+ - vi /etc/security/limits.conf  (更改linux nporc)

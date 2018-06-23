@@ -1,0 +1,12 @@
+* ehcahe is thread safe api
+[[https://github.com/ehcache/ehcache3/issues/1188][refer git conclusion]]
+I can't find acquireWriteLockOnKey in ehcache3.x api. So,
+ ehcache3.x do not need lock explicitly when put element in multithread env?
+
+Hi,
+There is no need for explicit locking and there was none in Ehcache 2.x
+even. Both are thread safe libraries with regards to cache operations.
+The explicit locking API from Ehcache 2.x was promoting the wrong kind of
+patterns and thus we have decided to not reproduce it in Ehcache 3.x.
+Regards,
+Louis
